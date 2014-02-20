@@ -31,6 +31,8 @@
             this.connectbtn = new System.Windows.Forms.Button();
             this.hiddeviceslistbox = new System.Windows.Forms.ListBox();
             this.hidconnectiongroupdbox = new System.Windows.Forms.GroupBox();
+            this.startupdatachckbox = new System.Windows.Forms.CheckBox();
+            this.refreshbtn = new System.Windows.Forms.Button();
             this.pidlbl = new System.Windows.Forms.Label();
             this.vidlbl = new System.Windows.Forms.Label();
             this.pidtxtbox = new System.Windows.Forms.TextBox();
@@ -45,8 +47,6 @@
             this.canstatustxtbox = new System.Windows.Forms.TextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statuslbl = new System.Windows.Forms.ToolStripStatusLabel();
-            this.refreshbtn = new System.Windows.Forms.Button();
-            this.startupdatachckbox = new System.Windows.Forms.CheckBox();
             this.hidconnectiongroupdbox.SuspendLayout();
             this.hiddevicegroupdbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cangrid)).BeginInit();
@@ -86,6 +86,25 @@
             this.hidconnectiongroupdbox.TabIndex = 2;
             this.hidconnectiongroupdbox.TabStop = false;
             this.hidconnectiongroupdbox.Text = "HID Connection";
+            // 
+            // startupdatachckbox
+            // 
+            this.startupdatachckbox.AutoSize = true;
+            this.startupdatachckbox.Location = new System.Drawing.Point(12, 100);
+            this.startupdatachckbox.Name = "startupdatachckbox";
+            this.startupdatachckbox.Size = new System.Drawing.Size(84, 17);
+            this.startupdatachckbox.TabIndex = 9;
+            this.startupdatachckbox.Text = "Start comms";
+            this.startupdatachckbox.UseVisualStyleBackColor = true;
+            // 
+            // refreshbtn
+            // 
+            this.refreshbtn.Location = new System.Drawing.Point(12, 152);
+            this.refreshbtn.Name = "refreshbtn";
+            this.refreshbtn.Size = new System.Drawing.Size(75, 23);
+            this.refreshbtn.TabIndex = 6;
+            this.refreshbtn.Text = "Refresh";
+            this.refreshbtn.UseVisualStyleBackColor = true;
             // 
             // pidlbl
             // 
@@ -224,27 +243,6 @@
             // 
             this.statuslbl.Name = "statuslbl";
             this.statuslbl.Size = new System.Drawing.Size(0, 17);
-            // 
-            // refreshbtn
-            // 
-            this.refreshbtn.Location = new System.Drawing.Point(12, 152);
-            this.refreshbtn.Name = "refreshbtn";
-            this.refreshbtn.Size = new System.Drawing.Size(75, 23);
-            this.refreshbtn.TabIndex = 6;
-            this.refreshbtn.Text = "Refresh";
-            this.refreshbtn.UseVisualStyleBackColor = true;
-            // 
-            // startupdatachckbox
-            // 
-            this.startupdatachckbox.AutoSize = true;
-            this.startupdatachckbox.Checked = true;
-            this.startupdatachckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.startupdatachckbox.Location = new System.Drawing.Point(12, 100);
-            this.startupdatachckbox.Name = "startupdatachckbox";
-            this.startupdatachckbox.Size = new System.Drawing.Size(84, 17);
-            this.startupdatachckbox.TabIndex = 9;
-            this.startupdatachckbox.Text = "Start comms";
-            this.startupdatachckbox.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
