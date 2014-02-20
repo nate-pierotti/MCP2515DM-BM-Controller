@@ -1,0 +1,5 @@
+C:\Users\Rob\Desktop\New MCP2515 test\MCP2515DM-BM-Controller\MCP2515DM-BM-Controller\HidLibrary\bin\Debug\HidLibrary.dll
+C:\Users\Rob\Desktop\New MCP2515 test\MCP2515DM-BM-Controller\MCP2515DM-BM-Controller\HidLibrary\bin\Debug\HidLibrary.pdb
+C:\Users\Rob\Desktop\New MCP2515 test\MCP2515DM-BM-Controller\MCP2515DM-BM-Controller\HidLibrary\obj\Debug\HidLibrary.csprojResolveAssemblyReference.cache
+C:\Users\Rob\Desktop\New MCP2515 test\MCP2515DM-BM-Controller\MCP2515DM-BM-Controller\HidLibrary\obj\Debug\HidLibrary.dll
+C:\Users\Rob\Desktop\New MCP2515 test\MCP2515DM-BM-Controller\MCP2515DM-BM-Controller\HidLibrary\obj\Debug\HidLibrary.pdb
