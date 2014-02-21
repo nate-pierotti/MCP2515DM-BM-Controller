@@ -27,7 +27,6 @@ namespace MCP2515DM_BM_Controller
 
         Stopwatch timer = new Stopwatch();
         double prevtime = 0.0;
-        List<addData> list = new List<addData>();
 
         bool setup;
 
@@ -57,16 +56,23 @@ namespace MCP2515DM_BM_Controller
         {
             if (connectbtn.Text == "Connect")
             {
-                _device.OpenDevice();
-                _device.MonitorDeviceEvents = true;
-                _device.Read(OnRead);
-                _device.Removed += _device_Removed;
-                //byte id = 1;
-                //_device.ReadFeatureData(buffer, id);
-                //_device.ReadReport(OnReport);
-                //_device.Capabilities.OutputReportByteLength = 64;
-
                 if (_device != null)
+                {
+                    _device.OpenDevice();
+                    _device.MonitorDeviceEvents = true;
+                    _device.Read(OnRead);
+                    _device.Removed += _device_Removed;
+                    //byte id = 1;
+                    //_device.ReadFeatureData(buffer, id);
+                    //_device.ReadReport(OnReport);
+                    //_device.Capabilities.OutputReportByteLength = 64;
+                }
+                else
+                {
+                    statuslbl.Text = "HID Device failed to connect";
+                }
+
+                if (_device.IsOpen)
                 {
                     statuslbl.Text = "HID device connected";
                     connectbtn.Text = "Disconnect";
@@ -199,19 +205,19 @@ namespace MCP2515DM_BM_Controller
                         canstatustxtbox.Text = "Normal";
                         //Drivermodecombobox.SelectedIndex = 0;
                         break;
-                    case 1:
+                    case 2:
                         canstatustxtbox.Text = "Sleep";
                         //Drivermodecombobox.SelectedIndex = 1;
                         break;
-                    case 2:
+                    case 4:
                         canstatustxtbox.Text = "Loopback";
                         //Drivermodecombobox.SelectedIndex = 2;
                         break;
-                    case 3:
+                    case 6:
                         canstatustxtbox.Text = "Listen - Only";
                         //Drivermodecombobox.SelectedIndex = 3;
                         break;
-                    case 4:
+                    case 8:
                         canstatustxtbox.Text = "Configuration";
                         //Drivermodecombobox.SelectedIndex = 4;
                         break;
@@ -310,6 +316,12 @@ namespace MCP2515DM_BM_Controller
         {
             string hex = BitConverter.ToString(input);
             return hex.Replace("_", "");
+        }
+
+        public int hexToInt(string hex)
+        {
+            int intOut = int.Parse(hex, System.Globalization.NumberStyles.HexNumber);
+            return intOut;
         }
 
         private string hextobinary(string hex)
@@ -591,9 +603,14 @@ namespace MCP2515DM_BM_Controller
             return binary;
         }
 
-        private void disconnectbtn_Click(object sender, EventArgs e)
+        private string binaryToHex(string binary)
         {
-           
+            string hexOut = "";
+            if (binary.Length > 0)
+            {
+                hexOut = Convert.ToInt32(binary, 2).ToString("X");
+            }
+            return hexOut;
         }
 
         private void canstatuscombobox_SelectedIndexChanged(object sender, EventArgs e)
@@ -742,14 +759,48 @@ namespace MCP2515DM_BM_Controller
             }
         }
 
-    }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            byte[] outbuffer = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            Array.Clear(buffer, 0, buffer.Length);
+            buffer[1] = Convert.ToByte(textBox1.Text); //bits 0-3 data length, bit 4 = rtr, bit 5 = extended id, bit 7 =  can message
+            buffer[2] = Convert.ToByte(textBox2.Text);
+            buffer[3] = Convert.ToByte(textBox3.Text);
+            buffer[5] = Convert.ToByte(textBox4.Text);
+            buffer[6] = Convert.ToByte(textBox5.Text);
+            buffer[7] = Convert.ToByte(textBox6.Text);
+            buffer[8] = Convert.ToByte(textBox9.Text);
+            buffer[9] = Convert.ToByte(textBox10.Text);
+            buffer[10] = Convert.ToByte(textBox11.Text);
+            buffer[11] = Convert.ToByte(textBox12.Text);
+            buffer[12] = Convert.ToByte(textBox13.Text);
+            buffer[13] = Convert.ToByte(textBox14.Text);
 
-    class addData
-    {
-        public string Time { get; set; }
-        public string ID { get; set; }
-        public int length { get; set; }
-        public string Data { get; set; }
-        public string Dir { get; set; }
+            buffer[53] = Convert.ToByte(textBox7.Text);
+            buffer[59] = Convert.ToByte(textBox8.Text);
+            //buffer[60] = 2;
+            //buffer[61] = 15;
+            //buffer[62] = 2;
+            Array.Copy(buffer, 1, outbuffer, 0, 63);
+            DecodeCan(buffer, "0", "softwareEvent");
+
+            bool ans = _device.Write(buffer);
+            if (ans == true) statuslbl.Text = "Can message sent";
+            else statuslbl.Text = "Can message failed to send";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Array.Clear(buffer, 0, buffer.Length);
+            buffer[58] = 0;
+            buffer[60] = 2;
+            buffer[61] = 15;
+            buffer[62] = 0;
+
+            bool ans = _device.Write(buffer);
+            if (ans == true) statuslbl.Text = "Control message sent";
+            else statuslbl.Text = "Control message failed to send";
+        }
+
     }
 }
