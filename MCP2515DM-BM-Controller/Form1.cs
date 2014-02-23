@@ -289,7 +289,8 @@ namespace MCP2515DM_BM_Controller
                 }
                 else if (sender == "softwareEvent")
                 {
-                    saveToFile(timeStamp, id, dataLength.ToString(), data, dir);
+                    toGUI(timeStamp, id, dataLength.ToString(), data, dir);
+                    //saveToFile(timeStamp, id, dataLength.ToString(), data, dir);
                 }
             }
             //return Format(timeStamp, ID, dataLength.ToString(), data);
@@ -763,7 +764,8 @@ namespace MCP2515DM_BM_Controller
         {
             byte[] outbuffer = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             Array.Clear(buffer, 0, buffer.Length);
-            buffer[1] = Convert.ToByte(textBox1.Text); //bits 0-3 data length, bit 4 = rtr, bit 5 = extended id, bit 7 =  can message
+            //buffer[0] = Convert.ToByte("");
+            buffer[1] = byte.Parse(textBox1.Text, System.Globalization.NumberStyles.HexNumber); //bits 0-3 data length, bit 4 = rtr, bit 5 = extended id, bit 7 =  can message
             buffer[2] = Convert.ToByte(textBox2.Text);
             buffer[3] = Convert.ToByte(textBox3.Text);
             buffer[5] = Convert.ToByte(textBox4.Text);
@@ -776,23 +778,25 @@ namespace MCP2515DM_BM_Controller
             buffer[12] = Convert.ToByte(textBox13.Text);
             buffer[13] = Convert.ToByte(textBox14.Text);
 
-            string[] newRow = new string[] { DateTime.Now.ToString("HH:mm:ss"), buffer[1].ToString(), buffer[5].ToString(), buffer[6].ToString("X") + " " + buffer[7].ToString("X") + " " + buffer[8].ToString("X") + " " + buffer[9].ToString("X") + " " + buffer[10].ToString("X") + " " + buffer[11].ToString("X") + " " + buffer[12].ToString("X") + " " + buffer[13].ToString("X"), "TX" };
-            cangrid.Invoke(new Action(() => cangrid.Rows.Add(newRow)));
-            cangrid.Invoke(new Action(() => cangrid.FirstDisplayedScrollingRowIndex = cangrid.RowCount - 1));
+            //string[] newRow = new string[] { DateTime.Now.ToString("HH:mm:ss"), buffer[1].ToString(), buffer[5].ToString(), buffer[6].ToString("X") + " " + buffer[7].ToString("X") + " " + buffer[8].ToString("X") + " " + buffer[9].ToString("X") + " " + buffer[10].ToString("X") + " " + buffer[11].ToString("X") + " " + buffer[12].ToString("X") + " " + buffer[13].ToString("X"), "TX" };
+            //cangrid.Invoke(new Action(() => cangrid.Rows.Add(newRow)));
+            //cangrid.Invoke(new Action(() => cangrid.FirstDisplayedScrollingRowIndex = cangrid.RowCount - 1));
 
-            cangrid.Invoke(new Action(() => cangrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells));
+            //cangrid.Invoke(new Action(() => cangrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells));
 
             buffer[53] = Convert.ToByte(textBox7.Text);
             buffer[59] = Convert.ToByte(textBox8.Text);
             //buffer[60] = 2;
             //buffer[61] = 15;
             //buffer[62] = 2;
-            Array.Copy(buffer, 1, outbuffer, 0, 63);
-            DecodeCan(outbuffer, "0", "softwareEvent");
+            //Array.Copy(buffer, 1, outbuffer, 0, 63);
 
             bool ans = _device.Write(buffer);
             if (ans == true) statuslbl.Text = "Can message sent";
             else statuslbl.Text = "Can message failed to send";
+
+            buffer[0] = 255;
+            DecodeCan(buffer, "0", "softwareEvent");
         }
 
         private void button2_Click(object sender, EventArgs e)
