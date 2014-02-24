@@ -765,8 +765,24 @@ namespace MCP2515DM_BM_Controller
             byte[] outbuffer = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             Array.Clear(buffer, 0, buffer.Length);
             //buffer[0] = Convert.ToByte("");
-            buffer[1] = byte.Parse(textBox1.Text, System.Globalization.NumberStyles.HexNumber); //bits 0-3 data length, bit 4 = rtr, bit 5 = extended id, bit 7 =  can message
-            buffer[2] = Convert.ToByte(textBox2.Text);
+            string binid = Convert.ToString(Convert.ToInt32(textBox1.Text, 16), 2);
+            if (binid.Length != 11)
+            {
+                if (binid.Length < 11)
+                {
+                    binid = binid.PadLeft(11, '0');
+                }
+                if (binid.Length > 11)
+                {
+                    binid = binid.Substring(0, 11);
+                }
+            }
+            string byte1 = binid.Substring(0, binid.Length - 3);
+            string byte2bits = binid.Substring(8, 3) + "00000";
+            buffer[1] = Convert.ToByte(Convert.ToInt64(byte1, 2));
+            buffer[2] = Convert.ToByte(Convert.ToInt64(byte2bits, 2));
+            int intval = hexToInt(textBox1.Text);
+
             buffer[3] = Convert.ToByte(textBox3.Text);
             buffer[5] = Convert.ToByte(textBox4.Text);
             buffer[6] = Convert.ToByte(textBox5.Text);
@@ -795,7 +811,7 @@ namespace MCP2515DM_BM_Controller
             if (ans == true) statuslbl.Text = "Can message sent";
             else statuslbl.Text = "Can message failed to send";
 
-            buffer[0] = 255;
+            //buffer[0] = 255;
             DecodeCan(buffer, "0", "softwareEvent");
         }
 
