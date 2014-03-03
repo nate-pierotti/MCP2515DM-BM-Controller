@@ -38,21 +38,27 @@
             this.pidtxtbox = new System.Windows.Forms.TextBox();
             this.vidtxtbox = new System.Windows.Forms.TextBox();
             this.hiddevicegroupdbox = new System.Windows.Forms.GroupBox();
-            this.textBox14 = new System.Windows.Forms.TextBox();
-            this.textBox13 = new System.Windows.Forms.TextBox();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.sendmsggroupbox = new System.Windows.Forms.GroupBox();
+            this.byte8lbl = new System.Windows.Forms.Label();
+            this.byte7lbl = new System.Windows.Forms.Label();
+            this.byte6lbl = new System.Windows.Forms.Label();
+            this.byte5lbl = new System.Windows.Forms.Label();
+            this.byte4lbl = new System.Windows.Forms.Label();
+            this.byte3lbl = new System.Windows.Forms.Label();
+            this.byte2lbl = new System.Windows.Forms.Label();
+            this.byte1lbl = new System.Windows.Forms.Label();
+            this.messagelengthlbl = new System.Windows.Forms.Label();
+            this.canidlbl = new System.Windows.Forms.Label();
+            this.canidtxtbox = new System.Windows.Forms.TextBox();
+            this.byte8txtbox = new System.Windows.Forms.TextBox();
+            this.byte1txtbox = new System.Windows.Forms.TextBox();
+            this.canmessagelengthtxtbox = new System.Windows.Forms.TextBox();
+            this.byte7txtbox = new System.Windows.Forms.TextBox();
+            this.byte2txtbox = new System.Windows.Forms.TextBox();
+            this.byte6txtbox = new System.Windows.Forms.TextBox();
+            this.byte5txtbox = new System.Windows.Forms.TextBox();
+            this.byte3txtbox = new System.Windows.Forms.TextBox();
+            this.byte4txtbox = new System.Windows.Forms.TextBox();
             this.sendbtn = new System.Windows.Forms.Button();
             this.cangrid = new System.Windows.Forms.DataGridView();
             this.recbtn = new System.Windows.Forms.Button();
@@ -63,8 +69,10 @@
             this.canstatustxtbox = new System.Windows.Forms.TextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statuslbl = new System.Windows.Forms.ToolStripStatusLabel();
+            this.sendrecordingbtn = new System.Windows.Forms.Button();
             this.hidconnectiongroupdbox.SuspendLayout();
             this.hiddevicegroupdbox.SuspendLayout();
+            this.sendmsggroupbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cangrid)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -84,7 +92,7 @@
             this.hiddeviceslistbox.FormattingEnabled = true;
             this.hiddeviceslistbox.Location = new System.Drawing.Point(12, 8);
             this.hiddeviceslistbox.Name = "hiddeviceslistbox";
-            this.hiddeviceslistbox.Size = new System.Drawing.Size(837, 82);
+            this.hiddeviceslistbox.Size = new System.Drawing.Size(781, 43);
             this.hiddeviceslistbox.TabIndex = 1;
             // 
             // hidconnectiongroupdbox
@@ -160,22 +168,8 @@
             // 
             // hiddevicegroupdbox
             // 
-            this.hiddevicegroupdbox.Controls.Add(this.textBox14);
-            this.hiddevicegroupdbox.Controls.Add(this.textBox13);
-            this.hiddevicegroupdbox.Controls.Add(this.textBox12);
-            this.hiddevicegroupdbox.Controls.Add(this.textBox11);
-            this.hiddevicegroupdbox.Controls.Add(this.textBox10);
-            this.hiddevicegroupdbox.Controls.Add(this.textBox9);
-            this.hiddevicegroupdbox.Controls.Add(this.textBox8);
-            this.hiddevicegroupdbox.Controls.Add(this.textBox7);
-            this.hiddevicegroupdbox.Controls.Add(this.textBox6);
-            this.hiddevicegroupdbox.Controls.Add(this.textBox5);
-            this.hiddevicegroupdbox.Controls.Add(this.textBox4);
-            this.hiddevicegroupdbox.Controls.Add(this.textBox3);
-            this.hiddevicegroupdbox.Controls.Add(this.textBox2);
-            this.hiddevicegroupdbox.Controls.Add(this.textBox1);
-            this.hiddevicegroupdbox.Controls.Add(this.button2);
-            this.hiddevicegroupdbox.Controls.Add(this.sendbtn);
+            this.hiddevicegroupdbox.Controls.Add(this.sendrecordingbtn);
+            this.hiddevicegroupdbox.Controls.Add(this.sendmsggroupbox);
             this.hiddevicegroupdbox.Controls.Add(this.cangrid);
             this.hiddevicegroupdbox.Controls.Add(this.recbtn);
             this.hiddevicegroupdbox.Controls.Add(this.hidconnectiongroupdbox);
@@ -184,149 +178,239 @@
             this.hiddevicegroupdbox.Controls.Add(this.canstatuscombobox);
             this.hiddevicegroupdbox.Controls.Add(this.canstatuslbl);
             this.hiddevicegroupdbox.Controls.Add(this.canstatustxtbox);
-            this.hiddevicegroupdbox.Location = new System.Drawing.Point(12, 96);
+            this.hiddevicegroupdbox.Location = new System.Drawing.Point(12, 57);
             this.hiddevicegroupdbox.Name = "hiddevicegroupdbox";
-            this.hiddevicegroupdbox.Size = new System.Drawing.Size(837, 327);
+            this.hiddevicegroupdbox.Size = new System.Drawing.Size(781, 327);
             this.hiddevicegroupdbox.TabIndex = 3;
             this.hiddevicegroupdbox.TabStop = false;
             this.hiddevicegroupdbox.Text = "MCP2515DM-BM";
             // 
-            // textBox14
+            // sendmsggroupbox
             // 
-            this.textBox14.Location = new System.Drawing.Point(497, 226);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(48, 20);
-            this.textBox14.TabIndex = 24;
-            this.textBox14.Text = "48";
+            this.sendmsggroupbox.Controls.Add(this.byte8lbl);
+            this.sendmsggroupbox.Controls.Add(this.sendbtn);
+            this.sendmsggroupbox.Controls.Add(this.byte7lbl);
+            this.sendmsggroupbox.Controls.Add(this.byte6lbl);
+            this.sendmsggroupbox.Controls.Add(this.byte5lbl);
+            this.sendmsggroupbox.Controls.Add(this.byte4lbl);
+            this.sendmsggroupbox.Controls.Add(this.byte3lbl);
+            this.sendmsggroupbox.Controls.Add(this.byte2lbl);
+            this.sendmsggroupbox.Controls.Add(this.byte1lbl);
+            this.sendmsggroupbox.Controls.Add(this.messagelengthlbl);
+            this.sendmsggroupbox.Controls.Add(this.canidlbl);
+            this.sendmsggroupbox.Controls.Add(this.canidtxtbox);
+            this.sendmsggroupbox.Controls.Add(this.byte8txtbox);
+            this.sendmsggroupbox.Controls.Add(this.byte1txtbox);
+            this.sendmsggroupbox.Controls.Add(this.canmessagelengthtxtbox);
+            this.sendmsggroupbox.Controls.Add(this.byte7txtbox);
+            this.sendmsggroupbox.Controls.Add(this.byte2txtbox);
+            this.sendmsggroupbox.Controls.Add(this.byte6txtbox);
+            this.sendmsggroupbox.Controls.Add(this.byte5txtbox);
+            this.sendmsggroupbox.Controls.Add(this.byte3txtbox);
+            this.sendmsggroupbox.Controls.Add(this.byte4txtbox);
+            this.sendmsggroupbox.Location = new System.Drawing.Point(112, 13);
+            this.sendmsggroupbox.Name = "sendmsggroupbox";
+            this.sendmsggroupbox.Size = new System.Drawing.Size(203, 223);
+            this.sendmsggroupbox.TabIndex = 25;
+            this.sendmsggroupbox.TabStop = false;
+            this.sendmsggroupbox.Text = "Send Message";
             // 
-            // textBox13
+            // byte8lbl
             // 
-            this.textBox13.Location = new System.Drawing.Point(443, 226);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(48, 20);
-            this.textBox13.TabIndex = 23;
-            this.textBox13.Text = "48";
+            this.byte8lbl.AutoSize = true;
+            this.byte8lbl.Location = new System.Drawing.Point(105, 201);
+            this.byte8lbl.Name = "byte8lbl";
+            this.byte8lbl.Size = new System.Drawing.Size(37, 13);
+            this.byte8lbl.TabIndex = 35;
+            this.byte8lbl.Text = "Byte 8";
             // 
-            // textBox12
+            // byte7lbl
             // 
-            this.textBox12.Location = new System.Drawing.Point(389, 226);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(48, 20);
-            this.textBox12.TabIndex = 22;
-            this.textBox12.Text = "48";
+            this.byte7lbl.AutoSize = true;
+            this.byte7lbl.Location = new System.Drawing.Point(105, 175);
+            this.byte7lbl.Name = "byte7lbl";
+            this.byte7lbl.Size = new System.Drawing.Size(37, 13);
+            this.byte7lbl.TabIndex = 34;
+            this.byte7lbl.Text = "Byte 7";
             // 
-            // textBox11
+            // byte6lbl
             // 
-            this.textBox11.Location = new System.Drawing.Point(335, 226);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(48, 20);
-            this.textBox11.TabIndex = 21;
-            this.textBox11.Text = "48";
+            this.byte6lbl.AutoSize = true;
+            this.byte6lbl.Location = new System.Drawing.Point(105, 149);
+            this.byte6lbl.Name = "byte6lbl";
+            this.byte6lbl.Size = new System.Drawing.Size(37, 13);
+            this.byte6lbl.TabIndex = 33;
+            this.byte6lbl.Text = "Byte 6";
             // 
-            // textBox10
+            // byte5lbl
             // 
-            this.textBox10.Location = new System.Drawing.Point(281, 226);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(48, 20);
-            this.textBox10.TabIndex = 20;
-            this.textBox10.Text = "48";
+            this.byte5lbl.AutoSize = true;
+            this.byte5lbl.Location = new System.Drawing.Point(105, 123);
+            this.byte5lbl.Name = "byte5lbl";
+            this.byte5lbl.Size = new System.Drawing.Size(37, 13);
+            this.byte5lbl.TabIndex = 32;
+            this.byte5lbl.Text = "Byte 5";
             // 
-            // textBox9
+            // byte4lbl
             // 
-            this.textBox9.Location = new System.Drawing.Point(227, 226);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(48, 20);
-            this.textBox9.TabIndex = 19;
-            this.textBox9.Text = "48";
+            this.byte4lbl.AutoSize = true;
+            this.byte4lbl.Location = new System.Drawing.Point(105, 97);
+            this.byte4lbl.Name = "byte4lbl";
+            this.byte4lbl.Size = new System.Drawing.Size(37, 13);
+            this.byte4lbl.TabIndex = 31;
+            this.byte4lbl.Text = "Byte 4";
             // 
-            // textBox8
+            // byte3lbl
             // 
-            this.textBox8.Location = new System.Drawing.Point(200, 258);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(48, 20);
-            this.textBox8.TabIndex = 18;
-            this.textBox8.Text = "0";
+            this.byte3lbl.AutoSize = true;
+            this.byte3lbl.Location = new System.Drawing.Point(105, 71);
+            this.byte3lbl.Name = "byte3lbl";
+            this.byte3lbl.Size = new System.Drawing.Size(37, 13);
+            this.byte3lbl.TabIndex = 30;
+            this.byte3lbl.Text = "Byte 3";
             // 
-            // textBox7
+            // byte2lbl
             // 
-            this.textBox7.Location = new System.Drawing.Point(146, 258);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(48, 20);
-            this.textBox7.TabIndex = 17;
-            this.textBox7.Text = "1";
+            this.byte2lbl.AutoSize = true;
+            this.byte2lbl.Location = new System.Drawing.Point(105, 45);
+            this.byte2lbl.Name = "byte2lbl";
+            this.byte2lbl.Size = new System.Drawing.Size(37, 13);
+            this.byte2lbl.TabIndex = 29;
+            this.byte2lbl.Text = "Byte 2";
             // 
-            // textBox6
+            // byte1lbl
             // 
-            this.textBox6.Location = new System.Drawing.Point(173, 226);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(48, 20);
-            this.textBox6.TabIndex = 16;
-            this.textBox6.Text = "48";
+            this.byte1lbl.AutoSize = true;
+            this.byte1lbl.Location = new System.Drawing.Point(105, 19);
+            this.byte1lbl.Name = "byte1lbl";
+            this.byte1lbl.Size = new System.Drawing.Size(37, 13);
+            this.byte1lbl.TabIndex = 27;
+            this.byte1lbl.Text = "Byte 1";
             // 
-            // textBox5
+            // messagelengthlbl
             // 
-            this.textBox5.Location = new System.Drawing.Point(119, 226);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(48, 20);
-            this.textBox5.TabIndex = 15;
-            this.textBox5.Text = "96";
+            this.messagelengthlbl.AutoSize = true;
+            this.messagelengthlbl.Location = new System.Drawing.Point(6, 45);
+            this.messagelengthlbl.Name = "messagelengthlbl";
+            this.messagelengthlbl.Size = new System.Drawing.Size(40, 13);
+            this.messagelengthlbl.TabIndex = 26;
+            this.messagelengthlbl.Text = "Length";
             // 
-            // textBox4
+            // canidlbl
             // 
-            this.textBox4.Location = new System.Drawing.Point(281, 200);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(48, 20);
-            this.textBox4.TabIndex = 14;
-            this.textBox4.Text = "8";
+            this.canidlbl.AutoSize = true;
+            this.canidlbl.Location = new System.Drawing.Point(6, 19);
+            this.canidlbl.Name = "canidlbl";
+            this.canidlbl.Size = new System.Drawing.Size(43, 13);
+            this.canidlbl.TabIndex = 25;
+            this.canidlbl.Text = "CAN ID";
             // 
-            // textBox3
+            // canidtxtbox
             // 
-            this.textBox3.Location = new System.Drawing.Point(227, 200);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(48, 20);
-            this.textBox3.TabIndex = 13;
-            this.textBox3.Text = "0";
+            this.canidtxtbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.canidtxtbox.Location = new System.Drawing.Point(51, 16);
+            this.canidtxtbox.Name = "canidtxtbox";
+            this.canidtxtbox.Size = new System.Drawing.Size(48, 20);
+            this.canidtxtbox.TabIndex = 11;
+            this.canidtxtbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.canidtxtbox_KeyPress);
             // 
-            // textBox2
+            // byte8txtbox
             // 
-            this.textBox2.Location = new System.Drawing.Point(173, 200);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(48, 20);
-            this.textBox2.TabIndex = 12;
-            this.textBox2.Text = "0";
+            this.byte8txtbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.byte8txtbox.Enabled = false;
+            this.byte8txtbox.Location = new System.Drawing.Point(146, 198);
+            this.byte8txtbox.Name = "byte8txtbox";
+            this.byte8txtbox.Size = new System.Drawing.Size(48, 20);
+            this.byte8txtbox.TabIndex = 24;
             // 
-            // textBox1
+            // byte1txtbox
             // 
-            this.textBox1.Location = new System.Drawing.Point(119, 200);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(48, 20);
-            this.textBox1.TabIndex = 11;
-            this.textBox1.Text = "550";
+            this.byte1txtbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.byte1txtbox.Enabled = false;
+            this.byte1txtbox.Location = new System.Drawing.Point(146, 16);
+            this.byte1txtbox.Name = "byte1txtbox";
+            this.byte1txtbox.Size = new System.Drawing.Size(48, 20);
+            this.byte1txtbox.TabIndex = 15;
+            this.byte1txtbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.byte1txtbox_KeyPress);
             // 
-            // button2
+            // canmessagelengthtxtbox
             // 
-            this.button2.Location = new System.Drawing.Point(200, 298);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.canmessagelengthtxtbox.Location = new System.Drawing.Point(51, 42);
+            this.canmessagelengthtxtbox.Name = "canmessagelengthtxtbox";
+            this.canmessagelengthtxtbox.Size = new System.Drawing.Size(48, 20);
+            this.canmessagelengthtxtbox.TabIndex = 14;
+            this.canmessagelengthtxtbox.TextChanged += new System.EventHandler(this.canmessagelengthtxtbox_TextChanged);
+            this.canmessagelengthtxtbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.canmessagelengthtxtbox_KeyPress);
+            // 
+            // byte7txtbox
+            // 
+            this.byte7txtbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.byte7txtbox.Enabled = false;
+            this.byte7txtbox.Location = new System.Drawing.Point(146, 172);
+            this.byte7txtbox.Name = "byte7txtbox";
+            this.byte7txtbox.Size = new System.Drawing.Size(48, 20);
+            this.byte7txtbox.TabIndex = 23;
+            // 
+            // byte2txtbox
+            // 
+            this.byte2txtbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.byte2txtbox.Enabled = false;
+            this.byte2txtbox.Location = new System.Drawing.Point(146, 42);
+            this.byte2txtbox.Name = "byte2txtbox";
+            this.byte2txtbox.Size = new System.Drawing.Size(48, 20);
+            this.byte2txtbox.TabIndex = 16;
+            this.byte2txtbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.byte2txtbox_KeyPress);
+            // 
+            // byte6txtbox
+            // 
+            this.byte6txtbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.byte6txtbox.Enabled = false;
+            this.byte6txtbox.Location = new System.Drawing.Point(146, 146);
+            this.byte6txtbox.Name = "byte6txtbox";
+            this.byte6txtbox.Size = new System.Drawing.Size(48, 20);
+            this.byte6txtbox.TabIndex = 21;
+            // 
+            // byte5txtbox
+            // 
+            this.byte5txtbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.byte5txtbox.Enabled = false;
+            this.byte5txtbox.Location = new System.Drawing.Point(146, 120);
+            this.byte5txtbox.Name = "byte5txtbox";
+            this.byte5txtbox.Size = new System.Drawing.Size(48, 20);
+            this.byte5txtbox.TabIndex = 22;
+            // 
+            // byte3txtbox
+            // 
+            this.byte3txtbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.byte3txtbox.Enabled = false;
+            this.byte3txtbox.Location = new System.Drawing.Point(146, 68);
+            this.byte3txtbox.Name = "byte3txtbox";
+            this.byte3txtbox.Size = new System.Drawing.Size(48, 20);
+            this.byte3txtbox.TabIndex = 19;
+            // 
+            // byte4txtbox
+            // 
+            this.byte4txtbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.byte4txtbox.Enabled = false;
+            this.byte4txtbox.Location = new System.Drawing.Point(146, 94);
+            this.byte4txtbox.Name = "byte4txtbox";
+            this.byte4txtbox.Size = new System.Drawing.Size(48, 20);
+            this.byte4txtbox.TabIndex = 20;
             // 
             // sendbtn
             // 
-            this.sendbtn.Location = new System.Drawing.Point(119, 298);
+            this.sendbtn.Location = new System.Drawing.Point(6, 194);
             this.sendbtn.Name = "sendbtn";
             this.sendbtn.Size = new System.Drawing.Size(75, 23);
             this.sendbtn.TabIndex = 9;
             this.sendbtn.Text = "Send";
             this.sendbtn.UseVisualStyleBackColor = true;
-            this.sendbtn.Click += new System.EventHandler(this.button1_Click);
+            this.sendbtn.Click += new System.EventHandler(this.sendbtn_Click);
             // 
             // cangrid
             // 
             this.cangrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.cangrid.Location = new System.Drawing.Point(379, 19);
+            this.cangrid.Location = new System.Drawing.Point(321, 13);
             this.cangrid.Name = "cangrid";
             this.cangrid.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cangrid.RowHeadersVisible = false;
@@ -347,9 +431,9 @@
             // rawusblistbox
             // 
             this.rawusblistbox.FormattingEnabled = true;
-            this.rawusblistbox.Location = new System.Drawing.Point(112, 19);
+            this.rawusblistbox.Location = new System.Drawing.Point(112, 242);
             this.rawusblistbox.Name = "rawusblistbox";
-            this.rawusblistbox.Size = new System.Drawing.Size(233, 134);
+            this.rawusblistbox.Size = new System.Drawing.Size(203, 43);
             this.rawusblistbox.TabIndex = 5;
             // 
             // setcanstatuslbl
@@ -373,7 +457,7 @@
             "Config"});
             this.canstatuscombobox.Location = new System.Drawing.Point(6, 257);
             this.canstatuscombobox.Name = "canstatuscombobox";
-            this.canstatuscombobox.Size = new System.Drawing.Size(121, 21);
+            this.canstatuscombobox.Size = new System.Drawing.Size(100, 21);
             this.canstatuscombobox.TabIndex = 3;
             this.canstatuscombobox.SelectedIndexChanged += new System.EventHandler(this.canstatuscombobox_SelectedIndexChanged);
             // 
@@ -397,9 +481,9 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statuslbl});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 431);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 391);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(864, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(803, 22);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -408,11 +492,20 @@
             this.statuslbl.Name = "statuslbl";
             this.statuslbl.Size = new System.Drawing.Size(0, 17);
             // 
+            // sendrecordingbtn
+            // 
+            this.sendrecordingbtn.Location = new System.Drawing.Point(119, 298);
+            this.sendrecordingbtn.Name = "sendrecordingbtn";
+            this.sendrecordingbtn.Size = new System.Drawing.Size(107, 23);
+            this.sendrecordingbtn.TabIndex = 26;
+            this.sendrecordingbtn.Text = "Send Recording";
+            this.sendrecordingbtn.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(864, 453);
+            this.ClientSize = new System.Drawing.Size(803, 413);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.hiddevicegroupdbox);
             this.Controls.Add(this.hiddeviceslistbox);
@@ -423,6 +516,8 @@
             this.hidconnectiongroupdbox.PerformLayout();
             this.hiddevicegroupdbox.ResumeLayout(false);
             this.hiddevicegroupdbox.PerformLayout();
+            this.sendmsggroupbox.ResumeLayout(false);
+            this.sendmsggroupbox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cangrid)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -453,21 +548,28 @@
         private System.Windows.Forms.Button refreshbtn;
         private System.Windows.Forms.CheckBox startupdatachckbox;
         private System.Windows.Forms.Button sendbtn;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox14;
-        private System.Windows.Forms.TextBox textBox13;
-        private System.Windows.Forms.TextBox textBox12;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox byte2txtbox;
+        private System.Windows.Forms.TextBox byte1txtbox;
+        private System.Windows.Forms.TextBox canmessagelengthtxtbox;
+        private System.Windows.Forms.TextBox canidtxtbox;
+        private System.Windows.Forms.TextBox byte8txtbox;
+        private System.Windows.Forms.TextBox byte7txtbox;
+        private System.Windows.Forms.TextBox byte5txtbox;
+        private System.Windows.Forms.TextBox byte6txtbox;
+        private System.Windows.Forms.TextBox byte4txtbox;
+        private System.Windows.Forms.TextBox byte3txtbox;
+        private System.Windows.Forms.GroupBox sendmsggroupbox;
+        private System.Windows.Forms.Label byte8lbl;
+        private System.Windows.Forms.Label byte7lbl;
+        private System.Windows.Forms.Label byte6lbl;
+        private System.Windows.Forms.Label byte5lbl;
+        private System.Windows.Forms.Label byte4lbl;
+        private System.Windows.Forms.Label byte3lbl;
+        private System.Windows.Forms.Label byte2lbl;
+        private System.Windows.Forms.Label byte1lbl;
+        private System.Windows.Forms.Label messagelengthlbl;
+        private System.Windows.Forms.Label canidlbl;
+        private System.Windows.Forms.Button sendrecordingbtn;
     }
 }
 

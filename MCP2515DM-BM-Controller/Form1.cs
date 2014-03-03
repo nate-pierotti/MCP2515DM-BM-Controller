@@ -287,11 +287,6 @@ namespace MCP2515DM_BM_Controller
                 {
                     toGUI(timeStamp, id, dataLength.ToString(), data, dir);
                 }
-                else if (sender == "softwareEvent")
-                {
-                    toGUI(timeStamp, id, dataLength.ToString(), data, dir);
-                    //saveToFile(timeStamp, id, dataLength.ToString(), data, dir);
-                }
             }
             //return Format(timeStamp, ID, dataLength.ToString(), data);
         }
@@ -321,8 +316,12 @@ namespace MCP2515DM_BM_Controller
 
         public int hexToInt(string hex)
         {
-            int intOut = int.Parse(hex, System.Globalization.NumberStyles.HexNumber);
-            return intOut;
+            if (hex != "")
+            {
+                int intOut = int.Parse(hex, System.Globalization.NumberStyles.HexNumber);
+                return intOut;
+            }
+            return 0;
         }
 
         private string hextobinary(string hex)
@@ -760,12 +759,12 @@ namespace MCP2515DM_BM_Controller
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void sendbtn_Click(object sender, EventArgs e)
         {
             byte[] outbuffer = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             Array.Clear(buffer, 0, buffer.Length);
             //buffer[0] = Convert.ToByte("");
-            string binid = Convert.ToString(Convert.ToInt32(textBox1.Text, 16), 2);
+            string binid = Convert.ToString(Convert.ToInt32(canidtxtbox.Text, 16), 2);
             if (binid.Length != 11)
             {
                 if (binid.Length < 11)
@@ -781,27 +780,21 @@ namespace MCP2515DM_BM_Controller
             string byte2bits = binid.Substring(8, 3) + "00000";
             buffer[1] = Convert.ToByte(Convert.ToInt64(byte1, 2));
             buffer[2] = Convert.ToByte(Convert.ToInt64(byte2bits, 2));
-            int intval = hexToInt(textBox1.Text);
+            //int intval = hexToInt(canidtxtbox.Text);
 
-            buffer[3] = Convert.ToByte(textBox3.Text);
-            buffer[5] = Convert.ToByte(textBox4.Text);
-            buffer[6] = Convert.ToByte(textBox5.Text);
-            buffer[7] = Convert.ToByte(textBox6.Text);
-            buffer[8] = Convert.ToByte(textBox9.Text);
-            buffer[9] = Convert.ToByte(textBox10.Text);
-            buffer[10] = Convert.ToByte(textBox11.Text);
-            buffer[11] = Convert.ToByte(textBox12.Text);
-            buffer[12] = Convert.ToByte(textBox13.Text);
-            buffer[13] = Convert.ToByte(textBox14.Text);
+            //buffer[3] = Convert.ToByte(textBox3.Text);
+            buffer[5] = Convert.ToByte(canmessagelengthtxtbox.Text);
+            buffer[6] = Convert.ToByte(hexToInt(byte1txtbox.Text));
+            buffer[7] = Convert.ToByte(hexToInt(byte2txtbox.Text));
+            buffer[8] = Convert.ToByte(hexToInt(byte3txtbox.Text));
+            buffer[9] = Convert.ToByte(hexToInt(byte4txtbox.Text));
+            buffer[10] = Convert.ToByte(hexToInt(byte6txtbox.Text));
+            buffer[11] = Convert.ToByte(hexToInt(byte5txtbox.Text));
+            buffer[12] = Convert.ToByte(hexToInt(byte7txtbox.Text));
+            buffer[13] = Convert.ToByte(hexToInt(byte8txtbox.Text));
 
-            //string[] newRow = new string[] { DateTime.Now.ToString("HH:mm:ss"), buffer[1].ToString(), buffer[5].ToString(), buffer[6].ToString("X") + " " + buffer[7].ToString("X") + " " + buffer[8].ToString("X") + " " + buffer[9].ToString("X") + " " + buffer[10].ToString("X") + " " + buffer[11].ToString("X") + " " + buffer[12].ToString("X") + " " + buffer[13].ToString("X"), "TX" };
-            //cangrid.Invoke(new Action(() => cangrid.Rows.Add(newRow)));
-            //cangrid.Invoke(new Action(() => cangrid.FirstDisplayedScrollingRowIndex = cangrid.RowCount - 1));
-
-            //cangrid.Invoke(new Action(() => cangrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells));
-
-            buffer[53] = Convert.ToByte(textBox7.Text);
-            buffer[59] = Convert.ToByte(textBox8.Text);
+            buffer[53] = Convert.ToByte(1);
+            //buffer[59] = Convert.ToByte(textBox8.Text);
             //buffer[60] = 2;
             //buffer[61] = 15;
             //buffer[62] = 2;
@@ -811,8 +804,10 @@ namespace MCP2515DM_BM_Controller
             if (ans == true) statuslbl.Text = "Can message sent";
             else statuslbl.Text = "Can message failed to send";
 
+
+            toGUI(DateTime.Now.ToString("HH:mm:ss"), canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text + " " + byte2txtbox.Text + " " + byte3txtbox.Text + " " + byte4txtbox.Text + " " + byte5txtbox.Text + " " + byte6txtbox.Text + " " + byte7txtbox.Text + " " + byte8txtbox.Text, "TX");
             //buffer[0] = 255;
-            DecodeCan(buffer, "0", "softwareEvent");
+            //DecodeCan(buffer, "0", "softwareEvent");
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -826,6 +821,133 @@ namespace MCP2515DM_BM_Controller
             bool ans = _device.Write(buffer);
             if (ans == true) statuslbl.Text = "Control message sent";
             else statuslbl.Text = "Control message failed to send";
+        }
+
+        private void canmessagelengthtxtbox_TextChanged(object sender, EventArgs e)
+        {
+            if (canmessagelengthtxtbox.Text != "")
+            {
+                if (Convert.ToInt32(canmessagelengthtxtbox.Text) == 1)
+                {
+                    byte1txtbox.Enabled = true;
+                    byte2txtbox.Enabled = false;
+                    byte3txtbox.Enabled = false;
+                    byte4txtbox.Enabled = false;
+                    byte5txtbox.Enabled = false;
+                    byte6txtbox.Enabled = false;
+                    byte7txtbox.Enabled = false;
+                    byte8txtbox.Enabled = false;
+                }
+                else if (Convert.ToInt32(canmessagelengthtxtbox.Text) == 2)
+                {
+                    byte1txtbox.Enabled = true;
+                    byte2txtbox.Enabled = true;
+                    byte3txtbox.Enabled = false;
+                    byte4txtbox.Enabled = false;
+                    byte5txtbox.Enabled = false;
+                    byte6txtbox.Enabled = false;
+                    byte7txtbox.Enabled = false;
+                    byte8txtbox.Enabled = false;
+                }
+                else if (Convert.ToInt32(canmessagelengthtxtbox.Text) == 3)
+                {
+                    byte1txtbox.Enabled = true;
+                    byte2txtbox.Enabled = true;
+                    byte3txtbox.Enabled = true;
+                    byte4txtbox.Enabled = false;
+                    byte5txtbox.Enabled = false;
+                    byte6txtbox.Enabled = false;
+                    byte7txtbox.Enabled = false;
+                    byte8txtbox.Enabled = false;
+                }
+                else if (Convert.ToInt32(canmessagelengthtxtbox.Text) == 4)
+                {
+                    byte1txtbox.Enabled = true;
+                    byte2txtbox.Enabled = true;
+                    byte3txtbox.Enabled = true;
+                    byte4txtbox.Enabled = true;
+                    byte5txtbox.Enabled = false;
+                    byte6txtbox.Enabled = false;
+                    byte7txtbox.Enabled = false;
+                    byte8txtbox.Enabled = false;
+                }
+                else if (Convert.ToInt32(canmessagelengthtxtbox.Text) == 5)
+                {
+                    byte1txtbox.Enabled = true;
+                    byte2txtbox.Enabled = true;
+                    byte3txtbox.Enabled = true;
+                    byte4txtbox.Enabled = true;
+                    byte5txtbox.Enabled = true;
+                    byte6txtbox.Enabled = false;
+                    byte7txtbox.Enabled = false;
+                    byte8txtbox.Enabled = false;
+                }
+                else if (Convert.ToInt32(canmessagelengthtxtbox.Text) == 6)
+                {
+                    byte1txtbox.Enabled = true;
+                    byte2txtbox.Enabled = true;
+                    byte3txtbox.Enabled = true;
+                    byte4txtbox.Enabled = true;
+                    byte5txtbox.Enabled = true;
+                    byte6txtbox.Enabled = true;
+                    byte7txtbox.Enabled = false;
+                    byte8txtbox.Enabled = false;
+                }
+                else if (Convert.ToInt32(canmessagelengthtxtbox.Text) == 7)
+                {
+                    byte1txtbox.Enabled = true;
+                    byte2txtbox.Enabled = true;
+                    byte3txtbox.Enabled = true;
+                    byte4txtbox.Enabled = true;
+                    byte5txtbox.Enabled = true;
+                    byte6txtbox.Enabled = true;
+                    byte7txtbox.Enabled = true;
+                    byte8txtbox.Enabled = false;
+                }
+                else if (Convert.ToInt32(canmessagelengthtxtbox.Text) == 8)
+                {
+                    byte1txtbox.Enabled = true;
+                    byte2txtbox.Enabled = true;
+                    byte3txtbox.Enabled = true;
+                    byte4txtbox.Enabled = true;
+                    byte5txtbox.Enabled = true;
+                    byte6txtbox.Enabled = true;
+                    byte7txtbox.Enabled = true;
+                    byte8txtbox.Enabled = true;
+                }
+                else if (Convert.ToInt32(canmessagelengthtxtbox.Text) > 0)
+                {
+                    byte1txtbox.Enabled = true;
+                    byte2txtbox.Enabled = true;
+                    byte3txtbox.Enabled = true;
+                    byte4txtbox.Enabled = true;
+                    byte5txtbox.Enabled = true;
+                    byte6txtbox.Enabled = true;
+                    byte7txtbox.Enabled = true;
+                    byte8txtbox.Enabled = true;
+                    canmessagelengthtxtbox.Text = "8";
+                }
+            }
+        }
+
+        private void canidtxtbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsNumber(e.KeyChar) || char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void canmessagelengthtxtbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsNumber(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void byte1txtbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsNumber(e.KeyChar) || char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void byte2txtbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsNumber(e.KeyChar) || char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
         }
 
     }
