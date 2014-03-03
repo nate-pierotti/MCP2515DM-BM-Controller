@@ -950,5 +950,10 @@ namespace MCP2515DM_BM_Controller
             e.Handled = !(char.IsNumber(e.KeyChar) || char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
         }
 
+        private void sendrecordingbtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

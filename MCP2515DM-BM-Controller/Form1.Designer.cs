@@ -38,8 +38,10 @@
             this.pidtxtbox = new System.Windows.Forms.TextBox();
             this.vidtxtbox = new System.Windows.Forms.TextBox();
             this.hiddevicegroupdbox = new System.Windows.Forms.GroupBox();
+            this.sendrecordingbtn = new System.Windows.Forms.Button();
             this.sendmsggroupbox = new System.Windows.Forms.GroupBox();
             this.byte8lbl = new System.Windows.Forms.Label();
+            this.sendbtn = new System.Windows.Forms.Button();
             this.byte7lbl = new System.Windows.Forms.Label();
             this.byte6lbl = new System.Windows.Forms.Label();
             this.byte5lbl = new System.Windows.Forms.Label();
@@ -59,7 +61,6 @@
             this.byte5txtbox = new System.Windows.Forms.TextBox();
             this.byte3txtbox = new System.Windows.Forms.TextBox();
             this.byte4txtbox = new System.Windows.Forms.TextBox();
-            this.sendbtn = new System.Windows.Forms.Button();
             this.cangrid = new System.Windows.Forms.DataGridView();
             this.recbtn = new System.Windows.Forms.Button();
             this.rawusblistbox = new System.Windows.Forms.ListBox();
@@ -69,7 +70,6 @@
             this.canstatustxtbox = new System.Windows.Forms.TextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statuslbl = new System.Windows.Forms.ToolStripStatusLabel();
-            this.sendrecordingbtn = new System.Windows.Forms.Button();
             this.hidconnectiongroupdbox.SuspendLayout();
             this.hiddevicegroupdbox.SuspendLayout();
             this.sendmsggroupbox.SuspendLayout();
@@ -185,6 +185,16 @@
             this.hiddevicegroupdbox.TabStop = false;
             this.hiddevicegroupdbox.Text = "MCP2515DM-BM";
             // 
+            // sendrecordingbtn
+            // 
+            this.sendrecordingbtn.Location = new System.Drawing.Point(119, 298);
+            this.sendrecordingbtn.Name = "sendrecordingbtn";
+            this.sendrecordingbtn.Size = new System.Drawing.Size(107, 23);
+            this.sendrecordingbtn.TabIndex = 26;
+            this.sendrecordingbtn.Text = "Send Recording";
+            this.sendrecordingbtn.UseVisualStyleBackColor = true;
+            this.sendrecordingbtn.Click += new System.EventHandler(this.sendrecordingbtn_Click);
+            // 
             // sendmsggroupbox
             // 
             this.sendmsggroupbox.Controls.Add(this.byte8lbl);
@@ -223,6 +233,16 @@
             this.byte8lbl.Size = new System.Drawing.Size(37, 13);
             this.byte8lbl.TabIndex = 35;
             this.byte8lbl.Text = "Byte 8";
+            // 
+            // sendbtn
+            // 
+            this.sendbtn.Location = new System.Drawing.Point(6, 194);
+            this.sendbtn.Name = "sendbtn";
+            this.sendbtn.Size = new System.Drawing.Size(75, 23);
+            this.sendbtn.TabIndex = 9;
+            this.sendbtn.Text = "Send";
+            this.sendbtn.UseVisualStyleBackColor = true;
+            this.sendbtn.Click += new System.EventHandler(this.sendbtn_Click);
             // 
             // byte7lbl
             // 
@@ -397,16 +417,6 @@
             this.byte4txtbox.Size = new System.Drawing.Size(48, 20);
             this.byte4txtbox.TabIndex = 20;
             // 
-            // sendbtn
-            // 
-            this.sendbtn.Location = new System.Drawing.Point(6, 194);
-            this.sendbtn.Name = "sendbtn";
-            this.sendbtn.Size = new System.Drawing.Size(75, 23);
-            this.sendbtn.TabIndex = 9;
-            this.sendbtn.Text = "Send";
-            this.sendbtn.UseVisualStyleBackColor = true;
-            this.sendbtn.Click += new System.EventHandler(this.sendbtn_Click);
-            // 
             // cangrid
             // 
             this.cangrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -491,15 +501,6 @@
             // 
             this.statuslbl.Name = "statuslbl";
             this.statuslbl.Size = new System.Drawing.Size(0, 17);
-            // 
-            // sendrecordingbtn
-            // 
-            this.sendrecordingbtn.Location = new System.Drawing.Point(119, 298);
-            this.sendrecordingbtn.Name = "sendrecordingbtn";
-            this.sendrecordingbtn.Size = new System.Drawing.Size(107, 23);
-            this.sendrecordingbtn.TabIndex = 26;
-            this.sendrecordingbtn.Text = "Send Recording";
-            this.sendrecordingbtn.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
