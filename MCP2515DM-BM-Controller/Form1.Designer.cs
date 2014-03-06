@@ -38,6 +38,7 @@
             this.pidtxtbox = new System.Windows.Forms.TextBox();
             this.vidtxtbox = new System.Windows.Forms.TextBox();
             this.hiddevicegroupdbox = new System.Windows.Forms.GroupBox();
+            this.e46datadisplaybtn = new System.Windows.Forms.Button();
             this.sendrecordingbtn = new System.Windows.Forms.Button();
             this.sendmsggroupbox = new System.Windows.Forms.GroupBox();
             this.byte8lbl = new System.Windows.Forms.Label();
@@ -70,6 +71,17 @@
             this.canstatustxtbox = new System.Windows.Forms.TextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statuslbl = new System.Windows.Forms.ToolStripStatusLabel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.e46speedlbl = new System.Windows.Forms.Label();
+            this.e46rpmlbl = new System.Windows.Forms.Label();
+            this.e46coolantlbl = new System.Windows.Forms.Label();
+            this.e46throttlelbl = new System.Windows.Forms.Label();
+            this.e46mileagelbl = new System.Windows.Forms.Label();
+            this.e46clocklbl = new System.Windows.Forms.Label();
+            this.e46mpglbl = new System.Windows.Forms.Label();
+            this.e46oillbl = new System.Windows.Forms.Label();
+            this.e46steeringlbl = new System.Windows.Forms.Label();
+            this.e46brakelbl = new System.Windows.Forms.Label();
             this.hidconnectiongroupdbox.SuspendLayout();
             this.hiddevicegroupdbox.SuspendLayout();
             this.sendmsggroupbox.SuspendLayout();
@@ -168,6 +180,7 @@
             // 
             // hiddevicegroupdbox
             // 
+            this.hiddevicegroupdbox.Controls.Add(this.e46datadisplaybtn);
             this.hiddevicegroupdbox.Controls.Add(this.sendrecordingbtn);
             this.hiddevicegroupdbox.Controls.Add(this.sendmsggroupbox);
             this.hiddevicegroupdbox.Controls.Add(this.cangrid);
@@ -184,6 +197,16 @@
             this.hiddevicegroupdbox.TabIndex = 3;
             this.hiddevicegroupdbox.TabStop = false;
             this.hiddevicegroupdbox.Text = "MCP2515DM-BM";
+            // 
+            // e46datadisplaybtn
+            // 
+            this.e46datadisplaybtn.Location = new System.Drawing.Point(232, 298);
+            this.e46datadisplaybtn.Name = "e46datadisplaybtn";
+            this.e46datadisplaybtn.Size = new System.Drawing.Size(75, 23);
+            this.e46datadisplaybtn.TabIndex = 27;
+            this.e46datadisplaybtn.Text = "e46 >>";
+            this.e46datadisplaybtn.UseVisualStyleBackColor = true;
+            this.e46datadisplaybtn.Click += new System.EventHandler(this.e46datadisplaybtn_Click);
             // 
             // sendrecordingbtn
             // 
@@ -493,7 +516,7 @@
             this.statuslbl});
             this.statusStrip1.Location = new System.Drawing.Point(0, 391);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(803, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1004, 22);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -502,11 +525,119 @@
             this.statuslbl.Name = "statuslbl";
             this.statuslbl.Size = new System.Drawing.Size(0, 17);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(892, 8);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 5;
+            // 
+            // e46speedlbl
+            // 
+            this.e46speedlbl.AutoSize = true;
+            this.e46speedlbl.Location = new System.Drawing.Point(812, 21);
+            this.e46speedlbl.Name = "e46speedlbl";
+            this.e46speedlbl.Size = new System.Drawing.Size(38, 13);
+            this.e46speedlbl.TabIndex = 6;
+            this.e46speedlbl.Text = "Speed";
+            // 
+            // e46rpmlbl
+            // 
+            this.e46rpmlbl.AutoSize = true;
+            this.e46rpmlbl.Location = new System.Drawing.Point(824, 60);
+            this.e46rpmlbl.Name = "e46rpmlbl";
+            this.e46rpmlbl.Size = new System.Drawing.Size(31, 13);
+            this.e46rpmlbl.TabIndex = 7;
+            this.e46rpmlbl.Text = "RPM";
+            // 
+            // e46coolantlbl
+            // 
+            this.e46coolantlbl.AutoSize = true;
+            this.e46coolantlbl.Location = new System.Drawing.Point(818, 100);
+            this.e46coolantlbl.Name = "e46coolantlbl";
+            this.e46coolantlbl.Size = new System.Drawing.Size(73, 13);
+            this.e46coolantlbl.TabIndex = 8;
+            this.e46coolantlbl.Text = "Coolant Temp";
+            // 
+            // e46throttlelbl
+            // 
+            this.e46throttlelbl.AutoSize = true;
+            this.e46throttlelbl.Location = new System.Drawing.Point(832, 134);
+            this.e46throttlelbl.Name = "e46throttlelbl";
+            this.e46throttlelbl.Size = new System.Drawing.Size(83, 13);
+            this.e46throttlelbl.TabIndex = 9;
+            this.e46throttlelbl.Text = "Throttle Position";
+            // 
+            // e46mileagelbl
+            // 
+            this.e46mileagelbl.AutoSize = true;
+            this.e46mileagelbl.Location = new System.Drawing.Point(820, 172);
+            this.e46mileagelbl.Name = "e46mileagelbl";
+            this.e46mileagelbl.Size = new System.Drawing.Size(44, 13);
+            this.e46mileagelbl.TabIndex = 10;
+            this.e46mileagelbl.Text = "Mileage";
+            // 
+            // e46clocklbl
+            // 
+            this.e46clocklbl.AutoSize = true;
+            this.e46clocklbl.Location = new System.Drawing.Point(838, 202);
+            this.e46clocklbl.Name = "e46clocklbl";
+            this.e46clocklbl.Size = new System.Drawing.Size(34, 13);
+            this.e46clocklbl.TabIndex = 11;
+            this.e46clocklbl.Text = "Clock";
+            // 
+            // e46mpglbl
+            // 
+            this.e46mpglbl.AutoSize = true;
+            this.e46mpglbl.Location = new System.Drawing.Point(832, 236);
+            this.e46mpglbl.Name = "e46mpglbl";
+            this.e46mpglbl.Size = new System.Drawing.Size(31, 13);
+            this.e46mpglbl.TabIndex = 12;
+            this.e46mpglbl.Text = "MPG";
+            // 
+            // e46oillbl
+            // 
+            this.e46oillbl.AutoSize = true;
+            this.e46oillbl.Location = new System.Drawing.Point(826, 282);
+            this.e46oillbl.Name = "e46oillbl";
+            this.e46oillbl.Size = new System.Drawing.Size(49, 13);
+            this.e46oillbl.TabIndex = 13;
+            this.e46oillbl.Text = "Oil Temp";
+            // 
+            // e46steeringlbl
+            // 
+            this.e46steeringlbl.AutoSize = true;
+            this.e46steeringlbl.Location = new System.Drawing.Point(822, 325);
+            this.e46steeringlbl.Name = "e46steeringlbl";
+            this.e46steeringlbl.Size = new System.Drawing.Size(76, 13);
+            this.e46steeringlbl.TabIndex = 14;
+            this.e46steeringlbl.Text = "Steering Angle";
+            // 
+            // e46brakelbl
+            // 
+            this.e46brakelbl.AutoSize = true;
+            this.e46brakelbl.Location = new System.Drawing.Point(829, 360);
+            this.e46brakelbl.Name = "e46brakelbl";
+            this.e46brakelbl.Size = new System.Drawing.Size(79, 13);
+            this.e46brakelbl.TabIndex = 15;
+            this.e46brakelbl.Text = "Brake Pressure";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(803, 413);
+            this.ClientSize = new System.Drawing.Size(1004, 413);
+            this.Controls.Add(this.e46brakelbl);
+            this.Controls.Add(this.e46steeringlbl);
+            this.Controls.Add(this.e46oillbl);
+            this.Controls.Add(this.e46mpglbl);
+            this.Controls.Add(this.e46clocklbl);
+            this.Controls.Add(this.e46mileagelbl);
+            this.Controls.Add(this.e46throttlelbl);
+            this.Controls.Add(this.e46coolantlbl);
+            this.Controls.Add(this.e46rpmlbl);
+            this.Controls.Add(this.e46speedlbl);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.hiddevicegroupdbox);
             this.Controls.Add(this.hiddeviceslistbox);
@@ -571,6 +702,18 @@
         private System.Windows.Forms.Label messagelengthlbl;
         private System.Windows.Forms.Label canidlbl;
         private System.Windows.Forms.Button sendrecordingbtn;
+        private System.Windows.Forms.Button e46datadisplaybtn;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label e46speedlbl;
+        private System.Windows.Forms.Label e46rpmlbl;
+        private System.Windows.Forms.Label e46coolantlbl;
+        private System.Windows.Forms.Label e46throttlelbl;
+        private System.Windows.Forms.Label e46mileagelbl;
+        private System.Windows.Forms.Label e46clocklbl;
+        private System.Windows.Forms.Label e46mpglbl;
+        private System.Windows.Forms.Label e46oillbl;
+        private System.Windows.Forms.Label e46steeringlbl;
+        private System.Windows.Forms.Label e46brakelbl;
     }
 }
 

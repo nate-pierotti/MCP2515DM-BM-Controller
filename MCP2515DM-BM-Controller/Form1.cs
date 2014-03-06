@@ -30,6 +30,8 @@ namespace MCP2515DM_BM_Controller
 
         bool setup;
 
+        bool e46 = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -66,19 +68,19 @@ namespace MCP2515DM_BM_Controller
                     //_device.ReadFeatureData(buffer, id);
                     //_device.ReadReport(OnReport);
                     //_device.Capabilities.OutputReportByteLength = 64;
-                }
-                else
-                {
-                    statuslbl.Text = "HID Device failed to connect";
-                }
 
-                if (_device.IsOpen)
-                {
-                    statuslbl.Text = "HID device connected";
-                    connectbtn.Text = "Disconnect";
-                    if (startupdatachckbox.Checked == true) startupcomms();
-                    //setupRoutine(null);
-                    //setup = true;
+                    if (_device.IsOpen)
+                    {
+                        statuslbl.Text = "HID device connected";
+                        connectbtn.Text = "Disconnect";
+                        if (startupdatachckbox.Checked == true) startupcomms();
+                        //setupRoutine(null);
+                        //setup = true;
+                    }
+                    else
+                    {
+                        statuslbl.Text = "HID Device failed to connect";
+                    }
                 }
                 else
                 {
@@ -286,6 +288,11 @@ namespace MCP2515DM_BM_Controller
                 if (sender == "usbEvent")
                 {
                     toGUI(timeStamp, id, dataLength.ToString(), data, dir);
+                }
+
+                if (e46 == true)
+                {
+
                 }
             }
             //return Format(timeStamp, ID, dataLength.ToString(), data);
@@ -953,6 +960,22 @@ namespace MCP2515DM_BM_Controller
         private void sendrecordingbtn_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void e46datadisplaybtn_Click(object sender, EventArgs e)
+        {
+            if (e46datadisplaybtn.Text == "e46 >>")
+            {
+                this.Size = new System.Drawing.Size(1020, 451);
+                e46datadisplaybtn.Text = "e46 <<";
+                e46 = true;
+            }
+            else
+            {
+                this.Size = new System.Drawing.Size(820, 451);
+                e46datadisplaybtn.Text = "e46 >>";
+                e46 = false;
+            }
         }
 
     }
