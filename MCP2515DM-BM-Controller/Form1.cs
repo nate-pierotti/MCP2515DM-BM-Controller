@@ -768,10 +768,52 @@ namespace MCP2515DM_BM_Controller
 
         private void sendbtn_Click(object sender, EventArgs e)
         {
+            if (canidtxtbox.Text != "")
+            {
+                if (canmessagelengthtxtbox.Text != "")
+                {
+                    if (byte1txtbox.Text != "")
+                    {
+                        if (byte2txtbox.Text != "")
+                        {
+                            if (byte3txtbox.Text != "")
+                            {
+                                if (byte4txtbox.Text != "")
+                                {
+                                    if (byte5txtbox.Text != "")
+                                    {
+                                        if (byte6txtbox.Text != "")
+                                        {
+                                            if (byte7txtbox.Text != "")
+                                            {
+                                                if (byte8txtbox.Text != "")
+                                                {
+                                                    sendCANMessage(canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text, byte2txtbox.Text, byte3txtbox.Text, byte4txtbox.Text, byte5txtbox.Text, byte6txtbox.Text, byte7txtbox.Text, byte8txtbox.Text);
+                                                }
+                                                sendCANMessage(canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text, byte2txtbox.Text, byte3txtbox.Text, byte4txtbox.Text, byte5txtbox.Text, byte6txtbox.Text, byte7txtbox.Text, null);
+                                            }
+                                            sendCANMessage(canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text, byte2txtbox.Text, byte3txtbox.Text, byte4txtbox.Text, byte5txtbox.Text, byte6txtbox.Text, null, null);
+                                        }
+                                        sendCANMessage(canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text, byte2txtbox.Text, byte3txtbox.Text, byte4txtbox.Text, byte5txtbox.Text, null, null, null);
+                                    }
+                                    sendCANMessage(canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text, byte2txtbox.Text, byte3txtbox.Text, byte4txtbox.Text, null, null, null, null);
+                                }
+                                sendCANMessage(canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text, byte2txtbox.Text, byte3txtbox.Text, null, null, null, null, null);
+                            }
+                            sendCANMessage(canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text, byte2txtbox.Text, null, null, null, null, null, null);
+                        }
+                        sendCANMessage(canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text, null, null, null, null, null, null, null);
+                    }
+                }
+            }
+        }
+
+        private void sendCANMessage(string ID, string CANLength, string byte1, string byte2, string byte3, string byte4, string byte5, string byte6, string byte7, string byte8)
+        {
             byte[] outbuffer = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             Array.Clear(buffer, 0, buffer.Length);
-            //buffer[0] = Convert.ToByte("");
-            string binid = Convert.ToString(Convert.ToInt32(canidtxtbox.Text, 16), 2);
+
+            string binid = Convert.ToString(Convert.ToInt32(ID, 16), 2);
             if (binid.Length != 11)
             {
                 if (binid.Length < 11)
@@ -783,29 +825,22 @@ namespace MCP2515DM_BM_Controller
                     binid = binid.Substring(0, 11);
                 }
             }
-            string byte1 = binid.Substring(0, binid.Length - 3);
+            string dataByte1 = binid.Substring(0, binid.Length - 3);
             string byte2bits = binid.Substring(8, 3) + "00000";
-            buffer[1] = Convert.ToByte(Convert.ToInt64(byte1, 2));
+            buffer[1] = Convert.ToByte(Convert.ToInt64(dataByte1, 2));
             buffer[2] = Convert.ToByte(Convert.ToInt64(byte2bits, 2));
-            //int intval = hexToInt(canidtxtbox.Text);
+            
+            buffer[5] = Convert.ToByte(CANLength);
+            if (byte1 != null) buffer[6] = Convert.ToByte(hexToInt(byte1));
+            if (byte2 != null) buffer[7] = Convert.ToByte(hexToInt(byte2));
+            if (byte3 != null) buffer[8] = Convert.ToByte(hexToInt(byte3));
+            if (byte4 != null) buffer[9] = Convert.ToByte(hexToInt(byte4));
+            if (byte5 != null) buffer[10] = Convert.ToByte(hexToInt(byte6));
+            if (byte6 != null) buffer[11] = Convert.ToByte(hexToInt(byte5));
+            if (byte7 != null) buffer[12] = Convert.ToByte(hexToInt(byte7));
+            if (byte8 != null) buffer[13] = Convert.ToByte(hexToInt(byte8));
 
-            //buffer[3] = Convert.ToByte(textBox3.Text);
-            buffer[5] = Convert.ToByte(canmessagelengthtxtbox.Text);
-            buffer[6] = Convert.ToByte(hexToInt(byte1txtbox.Text));
-            buffer[7] = Convert.ToByte(hexToInt(byte2txtbox.Text));
-            buffer[8] = Convert.ToByte(hexToInt(byte3txtbox.Text));
-            buffer[9] = Convert.ToByte(hexToInt(byte4txtbox.Text));
-            buffer[10] = Convert.ToByte(hexToInt(byte6txtbox.Text));
-            buffer[11] = Convert.ToByte(hexToInt(byte5txtbox.Text));
-            buffer[12] = Convert.ToByte(hexToInt(byte7txtbox.Text));
-            buffer[13] = Convert.ToByte(hexToInt(byte8txtbox.Text));
-
-            buffer[53] = Convert.ToByte(1);
-            //buffer[59] = Convert.ToByte(textBox8.Text);
-            //buffer[60] = 2;
-            //buffer[61] = 15;
-            //buffer[62] = 2;
-            //Array.Copy(buffer, 1, outbuffer, 0, 63);
+            buffer[53] = Convert.ToByte(1);//1 message to send
 
             bool ans = _device.Write(buffer);
             if (ans == true) statuslbl.Text = "Can message sent";
@@ -813,21 +848,6 @@ namespace MCP2515DM_BM_Controller
 
 
             toGUI(DateTime.Now.ToString("HH:mm:ss"), canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text + " " + byte2txtbox.Text + " " + byte3txtbox.Text + " " + byte4txtbox.Text + " " + byte5txtbox.Text + " " + byte6txtbox.Text + " " + byte7txtbox.Text + " " + byte8txtbox.Text, "TX");
-            //buffer[0] = 255;
-            //DecodeCan(buffer, "0", "softwareEvent");
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Array.Clear(buffer, 0, buffer.Length);
-            buffer[58] = 0;
-            buffer[60] = 2;
-            buffer[61] = 15;
-            buffer[62] = 0;
-
-            bool ans = _device.Write(buffer);
-            if (ans == true) statuslbl.Text = "Control message sent";
-            else statuslbl.Text = "Control message failed to send";
         }
 
         private void canmessagelengthtxtbox_TextChanged(object sender, EventArgs e)
@@ -959,7 +979,36 @@ namespace MCP2515DM_BM_Controller
 
         private void sendrecordingbtn_Click(object sender, EventArgs e)
         {
-
+            bool file = true;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            DialogResult openFile = openFileDialog.ShowDialog();
+            if (openFile == DialogResult.OK)
+            {
+                string fileToSend = openFileDialog.FileName;
+                StreamReader canSend = new StreamReader(fileToSend);
+                while (file == true)
+                {
+                    try
+                    {
+                        string canToSend = canSend.ReadLine();//first line is titles
+                        if (canToSend == "Time Stamp (ms),ID,Length,Data,Dir")//correct file
+                        {
+                            string canID = canToSend.Substring(0, canToSend.IndexOf(","));//canid
+                            //canToSend
+                            //string canbyte1 = canToSend.
+                        }
+                        else
+                        {
+                            statuslbl.Text = "File not recorded using this program";
+                            file = false;
+                        }
+                    }
+                    catch
+                    {
+                        file = false;
+                    }
+                }
+            }
         }
 
         private void e46datadisplaybtn_Click(object sender, EventArgs e)
