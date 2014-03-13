@@ -82,6 +82,15 @@
             this.e46oillbl = new System.Windows.Forms.Label();
             this.e46steeringlbl = new System.Windows.Forms.Label();
             this.e46brakelbl = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.textBox10 = new System.Windows.Forms.TextBox();
             this.hidconnectiongroupdbox.SuspendLayout();
             this.hiddevicegroupdbox.SuspendLayout();
             this.sendmsggroupbox.SuspendLayout();
@@ -527,7 +536,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(892, 8);
+            this.textBox1.Location = new System.Drawing.Point(882, 125);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 5;
@@ -535,7 +544,7 @@
             // e46speedlbl
             // 
             this.e46speedlbl.AutoSize = true;
-            this.e46speedlbl.Location = new System.Drawing.Point(812, 21);
+            this.e46speedlbl.Location = new System.Drawing.Point(838, 206);
             this.e46speedlbl.Name = "e46speedlbl";
             this.e46speedlbl.Size = new System.Drawing.Size(38, 13);
             this.e46speedlbl.TabIndex = 6;
@@ -544,7 +553,7 @@
             // e46rpmlbl
             // 
             this.e46rpmlbl.AutoSize = true;
-            this.e46rpmlbl.Location = new System.Drawing.Point(824, 60);
+            this.e46rpmlbl.Location = new System.Drawing.Point(845, 180);
             this.e46rpmlbl.Name = "e46rpmlbl";
             this.e46rpmlbl.Size = new System.Drawing.Size(31, 13);
             this.e46rpmlbl.TabIndex = 7;
@@ -553,7 +562,7 @@
             // e46coolantlbl
             // 
             this.e46coolantlbl.AutoSize = true;
-            this.e46coolantlbl.Location = new System.Drawing.Point(818, 100);
+            this.e46coolantlbl.Location = new System.Drawing.Point(803, 258);
             this.e46coolantlbl.Name = "e46coolantlbl";
             this.e46coolantlbl.Size = new System.Drawing.Size(73, 13);
             this.e46coolantlbl.TabIndex = 8;
@@ -562,7 +571,7 @@
             // e46throttlelbl
             // 
             this.e46throttlelbl.AutoSize = true;
-            this.e46throttlelbl.Location = new System.Drawing.Point(832, 134);
+            this.e46throttlelbl.Location = new System.Drawing.Point(793, 232);
             this.e46throttlelbl.Name = "e46throttlelbl";
             this.e46throttlelbl.Size = new System.Drawing.Size(83, 13);
             this.e46throttlelbl.TabIndex = 9;
@@ -571,7 +580,7 @@
             // e46mileagelbl
             // 
             this.e46mileagelbl.AutoSize = true;
-            this.e46mileagelbl.Location = new System.Drawing.Point(820, 172);
+            this.e46mileagelbl.Location = new System.Drawing.Point(832, 154);
             this.e46mileagelbl.Name = "e46mileagelbl";
             this.e46mileagelbl.Size = new System.Drawing.Size(44, 13);
             this.e46mileagelbl.TabIndex = 10;
@@ -580,7 +589,7 @@
             // e46clocklbl
             // 
             this.e46clocklbl.AutoSize = true;
-            this.e46clocklbl.Location = new System.Drawing.Point(838, 202);
+            this.e46clocklbl.Location = new System.Drawing.Point(842, 128);
             this.e46clocklbl.Name = "e46clocklbl";
             this.e46clocklbl.Size = new System.Drawing.Size(34, 13);
             this.e46clocklbl.TabIndex = 11;
@@ -589,7 +598,7 @@
             // e46mpglbl
             // 
             this.e46mpglbl.AutoSize = true;
-            this.e46mpglbl.Location = new System.Drawing.Point(832, 236);
+            this.e46mpglbl.Location = new System.Drawing.Point(845, 310);
             this.e46mpglbl.Name = "e46mpglbl";
             this.e46mpglbl.Size = new System.Drawing.Size(31, 13);
             this.e46mpglbl.TabIndex = 12;
@@ -598,7 +607,7 @@
             // e46oillbl
             // 
             this.e46oillbl.AutoSize = true;
-            this.e46oillbl.Location = new System.Drawing.Point(826, 282);
+            this.e46oillbl.Location = new System.Drawing.Point(827, 284);
             this.e46oillbl.Name = "e46oillbl";
             this.e46oillbl.Size = new System.Drawing.Size(49, 13);
             this.e46oillbl.TabIndex = 13;
@@ -607,7 +616,7 @@
             // e46steeringlbl
             // 
             this.e46steeringlbl.AutoSize = true;
-            this.e46steeringlbl.Location = new System.Drawing.Point(822, 325);
+            this.e46steeringlbl.Location = new System.Drawing.Point(800, 336);
             this.e46steeringlbl.Name = "e46steeringlbl";
             this.e46steeringlbl.Size = new System.Drawing.Size(76, 13);
             this.e46steeringlbl.TabIndex = 14;
@@ -616,17 +625,89 @@
             // e46brakelbl
             // 
             this.e46brakelbl.AutoSize = true;
-            this.e46brakelbl.Location = new System.Drawing.Point(829, 360);
+            this.e46brakelbl.Location = new System.Drawing.Point(797, 362);
             this.e46brakelbl.Name = "e46brakelbl";
             this.e46brakelbl.Size = new System.Drawing.Size(79, 13);
             this.e46brakelbl.TabIndex = 15;
             this.e46brakelbl.Text = "Brake Pressure";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(882, 151);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 16;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(882, 177);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 20);
+            this.textBox3.TabIndex = 17;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(882, 203);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(100, 20);
+            this.textBox4.TabIndex = 18;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(882, 229);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(100, 20);
+            this.textBox5.TabIndex = 19;
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(882, 255);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(100, 20);
+            this.textBox6.TabIndex = 20;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(882, 281);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(100, 20);
+            this.textBox7.TabIndex = 21;
+            // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(882, 307);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(100, 20);
+            this.textBox8.TabIndex = 22;
+            // 
+            // textBox9
+            // 
+            this.textBox9.Location = new System.Drawing.Point(882, 333);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(100, 20);
+            this.textBox9.TabIndex = 23;
+            // 
+            // textBox10
+            // 
+            this.textBox10.Location = new System.Drawing.Point(882, 359);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(100, 20);
+            this.textBox10.TabIndex = 24;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1004, 413);
+            this.Controls.Add(this.textBox10);
+            this.Controls.Add(this.textBox9);
+            this.Controls.Add(this.textBox8);
+            this.Controls.Add(this.textBox7);
+            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.e46brakelbl);
             this.Controls.Add(this.e46steeringlbl);
             this.Controls.Add(this.e46oillbl);
@@ -714,6 +795,15 @@
         private System.Windows.Forms.Label e46oillbl;
         private System.Windows.Forms.Label e46steeringlbl;
         private System.Windows.Forms.Label e46brakelbl;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox textBox10;
     }
 }
 

@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using System.Collections;
+using System.Threading;
 
 using HidLibrary;
 
@@ -21,6 +23,8 @@ namespace MCP2515DM_BM_Controller
         private int[] ProductIds = new[] { 0x0070 };
         private static HidDevice _device;
         private static byte[] buffer = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+        ArrayList msgsToSend = new ArrayList();
+        Thread sendFromFile;
 
         StreamWriter outfile;
         bool recording = false;
@@ -32,6 +36,7 @@ namespace MCP2515DM_BM_Controller
 
         bool e46 = false;
 
+        #region Setup
         public Form1()
         {
             InitializeComponent();
@@ -53,6 +58,7 @@ namespace MCP2515DM_BM_Controller
             cangrid.Columns[4].Name = "Dir";
             cangrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
         }
+        #endregion
 
         private void connectbtn_Click(object sender, EventArgs e)
         {
@@ -158,9 +164,9 @@ namespace MCP2515DM_BM_Controller
                     setupRoutine(inbuffer);
                 }
                 DecodeCan(inbuffer, time, "usbEvent");
-                if (recording)
+                if (e46)
                 {
-                    DecodeCan(inbuffer, time, "softwareEvent");
+                    //DecodeCan(inbuffer, time, "softwareEvent");
                 }
                 ReadSettings(inbuffer);
             }
@@ -229,75 +235,7 @@ namespace MCP2515DM_BM_Controller
                 }
         }
 
-        private void DecodeCan(byte[] items, string timeStamp, string sender)
-        {
-            string hexconfig = items[0].ToString("X");
-            string configbinary = hextobinary(hexconfig);
-            bool standardID = true;
-            int dataLength = 0;
-            string id = "";
-            string data = "";
-
-            if (configbinary[0] == '1')
-            {
-                //string hexDataLength = hexconfig[1].ToString();
-                dataLength = int.Parse(hexconfig[0].ToString(), System.Globalization.NumberStyles.HexNumber);
-
-                //byte 1 and 2 = standard id
-                string ID1 = items[1].ToString("X");
-                string byte3 = hextobinary(items[2].ToString("X"));
-                byte3 = byte3.Substring(5, byte3.Length - 5);
-
-                string binaryID = Convert.ToString(Convert.ToInt32(ID1, 16), 2);
-                binaryID = "00" + binaryID + byte3;
-                id = Convert.ToInt32(binaryID, 2).ToString("X");
-
-                if (hexconfig[0].ToString() == "A")//extended ID
-                {
-                    standardID = false;
-                    string byte3again = hextobinary(items[2].ToString("X"));
-                    byte3again = byte3again.Substring(0, 2);
-                    binaryID = binaryID.Substring(2, binaryID.Length - 2);
-                    binaryID = binaryID.Substring(0, binaryID.Length - 3);
-                    binaryID = binaryID + byte3again + byte3 + hextobinary(items[3].ToString("X")) + hextobinary(items[4].ToString("X"));
-                    id = Convert.ToInt32(binaryID, 2).ToString("X");
-                }
-                Debug.Print(id + " " + dataLength);
-                data = " ";
-                if (dataLength > 0)
-                {
-                    int i;
-                    if (standardID == true) i = 3;//data starts at items[4]
-                    else i = 5; //data starts at items[4] 
-                    int j = dataLength;
-                    while (j > 0)
-                    {
-                        string value = items[i].ToString("X");
-                        if (value.Length < 2)
-                        {
-                            value = value.PadLeft(2, '0');
-                        }
-                        data = data + value + " ";
-                        i++;
-                        j--;
-                    }
-                }
-
-                string dir = "RX";
-
-                if (sender == "usbEvent")
-                {
-                    toGUI(timeStamp, id, dataLength.ToString(), data, dir);
-                }
-
-                if (e46 == true)
-                {
-
-                }
-            }
-            //return Format(timeStamp, ID, dataLength.ToString(), data);
-        }
-
+        
         private void toGUI(string timeStamp, string id, string dataLength, string data, string dir)
         {
             string[] newRow = new string[] { timeStamp, id, dataLength.ToString(), data, dir };
@@ -315,6 +253,7 @@ namespace MCP2515DM_BM_Controller
             return canMessage;
         }
 
+        #region Conversions
         public string bytetohex(byte[] input)
         {
             string hex = BitConverter.ToString(input);
@@ -620,6 +559,76 @@ namespace MCP2515DM_BM_Controller
             return hexOut;
         }
 
+        private void DecodeCan(byte[] items, string timeStamp, string sender)
+        {
+            string hexconfig = items[0].ToString("X");
+            string configbinary = hextobinary(hexconfig);
+            bool standardID = true;
+            int dataLength = 0;
+            string id = "";
+            string data = "";
+
+            if (configbinary[0] == '1')
+            {
+                //string hexDataLength = hexconfig[1].ToString();
+                dataLength = int.Parse(hexconfig[0].ToString(), System.Globalization.NumberStyles.HexNumber);
+
+                //byte 1 and 2 = standard id
+                string ID1 = items[1].ToString("X");
+                string byte3 = hextobinary(items[2].ToString("X"));
+                byte3 = byte3.Substring(5, byte3.Length - 5);
+
+                string binaryID = Convert.ToString(Convert.ToInt32(ID1, 16), 2);
+                binaryID = "00" + binaryID + byte3;
+                id = Convert.ToInt32(binaryID, 2).ToString("X");
+
+                if (hexconfig[0].ToString() == "A")//extended ID
+                {
+                    standardID = false;
+                    string byte3again = hextobinary(items[2].ToString("X"));
+                    byte3again = byte3again.Substring(0, 2);
+                    binaryID = binaryID.Substring(2, binaryID.Length - 2);
+                    binaryID = binaryID.Substring(0, binaryID.Length - 3);
+                    binaryID = binaryID + byte3again + byte3 + hextobinary(items[3].ToString("X")) + hextobinary(items[4].ToString("X"));
+                    id = Convert.ToInt32(binaryID, 2).ToString("X");
+                }
+                Debug.Print(id + " " + dataLength);
+                data = " ";
+                if (dataLength > 0)
+                {
+                    int i;
+                    if (standardID == true) i = 3;//data starts at items[4]
+                    else i = 5; //data starts at items[4] 
+                    int j = dataLength;
+                    while (j > 0)
+                    {
+                        string value = items[i].ToString("X");
+                        if (value.Length < 2)
+                        {
+                            value = value.PadLeft(2, '0');
+                        }
+                        data = data + value + " ";
+                        i++;
+                        j--;
+                    }
+                }
+
+                string dir = "RX";
+
+                if (sender == "usbEvent")
+                {
+                    toGUI(timeStamp, id, dataLength.ToString(), data, dir);
+                }
+
+                if (recording == true)
+                {
+                    saveToFile(timeStamp, id, dataLength.ToString(), data, dir);
+                }
+            }
+            //return Format(timeStamp, ID, dataLength.ToString(), data);
+        }
+        #endregion
+
         private void canstatuscombobox_SelectedIndexChanged(object sender, EventArgs e)
         {
             buffer[58] = 3;
@@ -768,6 +777,7 @@ namespace MCP2515DM_BM_Controller
 
         private void sendbtn_Click(object sender, EventArgs e)
         {
+            bool ans = false;
             if (canidtxtbox.Text != "")
             {
                 if (canmessagelengthtxtbox.Text != "")
@@ -788,27 +798,36 @@ namespace MCP2515DM_BM_Controller
                                             {
                                                 if (byte8txtbox.Text != "")
                                                 {
-                                                    sendCANMessage(canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text, byte2txtbox.Text, byte3txtbox.Text, byte4txtbox.Text, byte5txtbox.Text, byte6txtbox.Text, byte7txtbox.Text, byte8txtbox.Text);
+                                                    ans = sendCANMessage(canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text, byte2txtbox.Text, byte3txtbox.Text, byte4txtbox.Text, byte5txtbox.Text, byte6txtbox.Text, byte7txtbox.Text, byte8txtbox.Text);
                                                 }
-                                                sendCANMessage(canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text, byte2txtbox.Text, byte3txtbox.Text, byte4txtbox.Text, byte5txtbox.Text, byte6txtbox.Text, byte7txtbox.Text, null);
+                                                ans = sendCANMessage(canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text, byte2txtbox.Text, byte3txtbox.Text, byte4txtbox.Text, byte5txtbox.Text, byte6txtbox.Text, byte7txtbox.Text, null);
                                             }
-                                            sendCANMessage(canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text, byte2txtbox.Text, byte3txtbox.Text, byte4txtbox.Text, byte5txtbox.Text, byte6txtbox.Text, null, null);
+                                            ans = sendCANMessage(canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text, byte2txtbox.Text, byte3txtbox.Text, byte4txtbox.Text, byte5txtbox.Text, byte6txtbox.Text, null, null);
                                         }
-                                        sendCANMessage(canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text, byte2txtbox.Text, byte3txtbox.Text, byte4txtbox.Text, byte5txtbox.Text, null, null, null);
+                                        ans = sendCANMessage(canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text, byte2txtbox.Text, byte3txtbox.Text, byte4txtbox.Text, byte5txtbox.Text, null, null, null);
                                     }
-                                    sendCANMessage(canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text, byte2txtbox.Text, byte3txtbox.Text, byte4txtbox.Text, null, null, null, null);
+                                    ans = sendCANMessage(canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text, byte2txtbox.Text, byte3txtbox.Text, byte4txtbox.Text, null, null, null, null);
                                 }
-                                sendCANMessage(canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text, byte2txtbox.Text, byte3txtbox.Text, null, null, null, null, null);
+                                ans = sendCANMessage(canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text, byte2txtbox.Text, byte3txtbox.Text, null, null, null, null, null);
                             }
-                            sendCANMessage(canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text, byte2txtbox.Text, null, null, null, null, null, null);
+                            ans = sendCANMessage(canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text, byte2txtbox.Text, null, null, null, null, null, null);
                         }
-                        sendCANMessage(canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text, null, null, null, null, null, null, null);
+                        ans = sendCANMessage(canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text, null, null, null, null, null, null, null);
                     }
                 }
             }
+            if (ans == true)
+            {
+                statuslbl.Text = "Can message sent";
+                toGUI(DateTime.Now.ToString("HH:mm:ss"), canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text + " " + byte2txtbox.Text + " " + byte3txtbox.Text + " " + byte4txtbox.Text + " " + byte5txtbox.Text + " " + byte6txtbox.Text + " " + byte7txtbox.Text + " " + byte8txtbox.Text, "TX");
+            }
+            else
+            {
+                statuslbl.Text = "Can message failed to send";
+            }
         }
 
-        private void sendCANMessage(string ID, string CANLength, string byte1, string byte2, string byte3, string byte4, string byte5, string byte6, string byte7, string byte8)
+        private bool sendCANMessage(string ID, string CANLength, string byte1, string byte2, string byte3, string byte4, string byte5, string byte6, string byte7, string byte8)
         {
             byte[] outbuffer = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             Array.Clear(buffer, 0, buffer.Length);
@@ -843,13 +862,12 @@ namespace MCP2515DM_BM_Controller
             buffer[53] = Convert.ToByte(1);//1 message to send
 
             bool ans = _device.Write(buffer);
-            if (ans == true) statuslbl.Text = "Can message sent";
-            else statuslbl.Text = "Can message failed to send";
 
-
-            toGUI(DateTime.Now.ToString("HH:mm:ss"), canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text + " " + byte2txtbox.Text + " " + byte3txtbox.Text + " " + byte4txtbox.Text + " " + byte5txtbox.Text + " " + byte6txtbox.Text + " " + byte7txtbox.Text + " " + byte8txtbox.Text, "TX");
+            //toGUI(DateTime.Now.ToString("HH:mm:ss"), canidtxtbox.Text, canmessagelengthtxtbox.Text, byte1txtbox.Text + " " + byte2txtbox.Text + " " + byte3txtbox.Text + " " + byte4txtbox.Text + " " + byte5txtbox.Text + " " + byte6txtbox.Text + " " + byte7txtbox.Text + " " + byte8txtbox.Text, "TX");
+            return ans;
         }
 
+        #region Input Formatting
         private void canmessagelengthtxtbox_TextChanged(object sender, EventArgs e)
         {
             if (canmessagelengthtxtbox.Text != "")
@@ -976,6 +994,7 @@ namespace MCP2515DM_BM_Controller
         {
             e.Handled = !(char.IsNumber(e.KeyChar) || char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
         }
+        #endregion
 
         private void sendrecordingbtn_Click(object sender, EventArgs e)
         {
@@ -985,32 +1004,146 @@ namespace MCP2515DM_BM_Controller
             if (openFile == DialogResult.OK)
             {
                 string fileToSend = openFileDialog.FileName;
-                StreamReader canSend = new StreamReader(fileToSend);
-                while (file == true)
+                if (File.Exists(fileToSend))
                 {
+                    StreamReader canSend = new StreamReader(fileToSend);
                     try
                     {
                         string canToSend = canSend.ReadLine();//first line is titles
                         if (canToSend == "Time Stamp (ms),ID,Length,Data,Dir")//correct file
                         {
-                            string canID = canToSend.Substring(0, canToSend.IndexOf(","));//canid
-                            //canToSend
-                            //string canbyte1 = canToSend.
+                            msgsToSend.Clear();
+                            while (file == true)
+                            {
+                                canToSend = canSend.ReadLine();
+                                if (canToSend != null)
+                                {
+                                    string timeStamp = canToSend.Substring(0, canToSend.IndexOf(","));
+                                    canToSend = canToSend.Substring(timeStamp.Length + 1, (canToSend.Length - timeStamp.Length) - 1);
+                                    string canID = canToSend.Substring(0, canToSend.IndexOf(","));//canid
+                                    canToSend = canToSend.Substring(canID.Length + 1, (canToSend.Length - canID.Length) - 1);
+                                    string canLength = canToSend.Substring(0, canToSend.IndexOf(","));
+                                    canToSend = canToSend.Substring(canLength.Length + 1, (canToSend.Length - canLength.Length) - 1);
+                                    string canData = canToSend.Substring(0, canToSend.IndexOf(","));
+                                    canToSend = canToSend.Substring(canData.Length + 1, (canToSend.Length - canData.Length) - 1);
+                                    string canDir = canToSend.Substring(0, canToSend.Length);
+
+                                    msgsToSend.Add(timeStamp + "," + canID + "," + canLength + "," + canData);
+                                }
+                                else
+                                {
+                                    statuslbl.Text = "End of file CAN sending stopped";
+                                    file = false;
+                                    canSend.Close();
+                                }
+                            }
+                            if (msgsToSend.Count > 1)
+                            {
+                                sendFromFile = new Thread(CANMessagesToSend);
+                                sendFromFile.Name = "Sending CAN messages from File";
+                                sendFromFile.IsBackground = true;
+                                sendFromFile.Start();
+
+                            }
                         }
                         else
                         {
                             statuslbl.Text = "File not recorded using this program";
                             file = false;
+                            canSend.Close();
                         }
                     }
                     catch
                     {
+                        statuslbl.Text = "File does not exist";
                         file = false;
+                        canSend.Close();
                     }
+                }
+                else
+                {
+                    statuslbl.Text = "File does not exist";
                 }
             }
         }
 
+        private void CANMessagesToSend()
+        {
+            int i = 0;
+            if (msgsToSend.Count > 1)
+            {
+                int msgsToSendCount = msgsToSend.Count;
+                for (i = 0; i < msgsToSendCount; i++)
+                {
+                    string canMessage = msgsToSend[i].ToString();
+                    //msgsToSend.RemoveAt(i);
+
+                    string timeStamp = canMessage.Substring(0, canMessage.IndexOf(","));
+                    canMessage = canMessage.Substring(timeStamp.Length + 1, (canMessage.Length - timeStamp.Length) - 1);
+                    string canID = canMessage.Substring(0, canMessage.IndexOf(","));//canid
+                    canMessage = canMessage.Substring(canID.Length + 1, (canMessage.Length - canID.Length) - 1);
+                    string canLength = canMessage.Substring(0, canMessage.IndexOf(","));
+                    canMessage = canMessage.Substring(canLength.Length + 1, (canMessage.Length - canLength.Length) - 1);
+                    string canData = canMessage.Substring(1, canMessage.Length -1);
+                    string canDataForDisplay = canData;
+
+                    string byte1 = canData.Substring(0, canData.IndexOf(" "));
+                    canData = canData.Substring(byte1.Length + 1, (canData.Length - byte1.Length) - 1);
+                    string byte2 = canData.Substring(0, canData.IndexOf(" "));
+                    canData = canData.Substring(byte2.Length + 1, (canData.Length - byte2.Length) - 1);
+                    string byte3 = canData.Substring(0, canData.IndexOf(" "));
+                    canData = canData.Substring(byte3.Length + 1, (canData.Length - byte3.Length) - 1);
+                    string byte4 = canData.Substring(0, canData.IndexOf(" "));
+                    canData = canData.Substring(byte4.Length + 1, (canData.Length - byte4.Length) - 1);
+                    string byte5 = canData.Substring(0, canData.IndexOf(" "));
+                    canData = canData.Substring(byte5.Length + 1, (canData.Length - byte5.Length) - 1);
+                    string byte6 = canData.Substring(0, canData.IndexOf(" "));
+                    canData = canData.Substring(byte6.Length + 1, (canData.Length - byte6.Length) - 1);
+                    string byte7 = canData.Substring(0, canData.IndexOf(" "));
+                    canData = canData.Substring(byte7.Length + 1, (canData.Length - byte7.Length) - 1);
+                    string byte8 = canData.Substring(0, canData.IndexOf(" "));
+                    canData = canData.Substring(byte8.Length + 1, (canData.Length - byte8.Length) - 1);
+
+                    if (timeStamp.Contains(":"))//start time
+                    {
+                        bool ans = sendCANMessage(canID, canLength, byte1, byte2, byte3, byte4, byte5, byte6, byte7, byte8);
+                        if (ans == true)
+                        {
+                            statuslbl.Text = "Sending CAN message from file";
+                            toGUI(DateTime.Now.ToString("HH:mm:ss"), canID, canLength, canDataForDisplay, "TX");
+                        }
+                        else
+                        {
+                            statuslbl.Text = "CAN message failed to send. Aborting CAN send";
+                            sendFromFile.Abort();
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        Thread.Sleep(Convert.ToInt32(timeStamp));
+                        bool ans = sendCANMessage(canID, canLength, byte1, byte2, byte3, byte4, byte5, byte6, byte7, byte8);
+                        if (ans == true)
+                        {
+                            statuslbl.Text = "Sending CAN message from file";
+                            toGUI(DateTime.Now.ToString("HH:mm:ss"), canID, canLength, canDataForDisplay, "TX");
+                        }
+                        else
+                        {
+                            statuslbl.Text = "CAN message failed to send. Aborting CAN send";
+                            sendFromFile.Abort();
+                            break;
+                        }
+                    }
+                }
+                if (msgsToSendCount == i)
+                {
+                    statuslbl.Text = "CAN message sending from file COMPLETE";
+                }
+            }
+        }
+
+        #region e46
         private void e46datadisplaybtn_Click(object sender, EventArgs e)
         {
             if (e46datadisplaybtn.Text == "e46 >>")
@@ -1027,5 +1160,50 @@ namespace MCP2515DM_BM_Controller
             }
         }
 
+        private void ASC1(string msg)
+        {
+
+        }
+
+        private void DME1(string msg)
+        {
+
+        }
+
+        private void DME2(string msg)
+        {
+
+        }
+
+        private void AC(string msg)
+        {
+
+        }
+
+        private void Consts(string msg)
+        {
+
+        }
+
+        private void DME4(string msg)
+        {
+
+        }
+
+        private void ABS(string msg)
+        {
+
+        }
+
+        private void Sensors(string msg)
+        {
+
+        }
+
+        private void BrakePressure(string msg)
+        {
+
+        }
+        #endregion
     }
 }
