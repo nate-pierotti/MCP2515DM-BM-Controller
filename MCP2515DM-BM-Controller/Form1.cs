@@ -1160,19 +1160,84 @@ namespace MCP2515DM_BM_Controller
             }
         }
 
+        private void checkFore46Message(string canMessage)
+        {
+            //canMessage = canMessage.Substring(canMessage.IndexOf(" "),
+        }
+
         private void ASC1(string msg)
         {
+            string byte0 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte0.Length);
+            string byte1 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte1.Length);
+            string byte2 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte2.Length);
+            string byte3 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte3.Length);
+            string byte4 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte4.Length);
+            string byte5 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte5.Length);
+            string byte6 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte6.Length);
+            string byte7 = msg.Substring(0, msg.IndexOf(" "));
 
+            string speed = hextobinary(byte1);
+            speed = speed.Substring(3, 4);
+            speed = speed + hextobinary(byte2);
+
+            double speedVal = Convert.ToInt64(speed, 2);
+            speedVal = speedVal / 0.08;
+
+            speedtxtbox.Text = speedVal.ToString();
         }
 
         private void DME1(string msg)
         {
+            string byte0 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte0.Length);
+            string byte1 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte1.Length);
+            string byte2 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte2.Length);
+            string byte3 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte3.Length);
+            string byte4 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte4.Length);
+            string byte5 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte5.Length);
+            string byte6 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte6.Length);
+            string byte7 = msg.Substring(0, msg.IndexOf(" "));
 
+            //RPM
+            rpmtxtbox.Text = Convert.ToString((hexToInt(byte3) + hexToInt(byte2))/6.4) + " " + Convert.ToString(Convert.ToInt64(hextobinary(byte3) + hextobinary(byte2),2)/6.4);
         }
 
         private void DME2(string msg)
         {
+            string byte0 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte0.Length);
+            string byte1 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte1.Length);
+            string byte2 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte2.Length);
+            string byte3 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte3.Length);
+            string byte4 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte4.Length);
+            string byte5 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte5.Length);
+            string byte6 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte6.Length);
+            string byte7 = msg.Substring(0, msg.IndexOf(" "));
 
+            //Water Temp
+            watertemptxtbox.Text = ((0.75 * int.Parse(byte1, System.Globalization.NumberStyles.HexNumber)) - 48.373).ToString();
+
+            //Throttle Pos
+            throttlepostxtbox.Text = (int.Parse(byte5, System.Globalization.NumberStyles.HexNumber) / 2.54).ToString();
         }
 
         private void AC(string msg)
@@ -1187,12 +1252,92 @@ namespace MCP2515DM_BM_Controller
 
         private void DME4(string msg)
         {
+            string byte0 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte0.Length);
+            string byte1 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte1.Length);
+            string byte2 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte2.Length);
+            string byte3 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte3.Length);
+            string byte4 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte4.Length);
+            string byte5 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte5.Length);
+            string byte6 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte6.Length);
+            string byte7 = msg.Substring(0, msg.IndexOf(" "));
 
+            string byte0bin = hextobinary(byte0);
+
+            //Warning lights
+            switch (byte0bin)
+            {
+                case "00000010"://Check engine light
+                    chckenginelbl.Visible = true;
+                    break;
+                case "00001000"://Cruise Light
+                    cruiselbl.Visible = false;
+                    break;
+                case "00100000"://EML light
+                    emllbl.Visible = false;
+                    break;
+                default:
+                    chckenginelbl.Visible = false;
+                    cruiselbl.Visible = false;
+                    emllbl.Visible = false;
+                    break;
+            }
+
+            if (hextobinary(byte3) == "00001000")//Overheat light
+            {
+                overheatlbl.Visible = true;
+            }
+            else overheatlbl.Visible = false;
+
+            //Oil Temp
+            oiltemptxtbox.Text = ((0.75 * int.Parse(byte4, System.Globalization.NumberStyles.HexNumber)) - 48.373).ToString();
         }
 
         private void ABS(string msg)
         {
+            string byte0 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte0.Length);
+            string byte1 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte1.Length);
+            string byte2 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte2.Length);
+            string byte3 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte3.Length);
+            string byte4 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte4.Length);
+            string byte5 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte5.Length);
+            string byte6 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte6.Length);
+            string byte7 = msg.Substring(0, msg.IndexOf(" "));
 
+            //Wheel 1
+            string last4bits = hextobinary(byte1);
+            last4bits = last4bits.Substring(0,4);
+            string wheel1bin = hextobinary(byte0) + last4bits;
+
+            last4bits = hextobinary(byte3);
+            last4bits = last4bits.Substring(0, 4);
+            string wheel2bin = hextobinary(byte2) + last4bits;
+
+            last4bits = hextobinary(byte5);
+            last4bits = last4bits.Substring(0, 4);
+            string wheel3bin = hextobinary(byte4) + last4bits;
+
+            last4bits = hextobinary(byte7);
+            last4bits = last4bits.Substring(0, 4);
+            string wheel4bin = hextobinary(byte6) + last4bits;
+
+            wheel1txtbox.Text = (Convert.ToInt64(wheel1bin, 2)).ToString();
+            wheel2txtbox.Text = (Convert.ToInt64(wheel2bin, 2)).ToString();
+            wheel3txtbox.Text = (Convert.ToInt64(wheel3bin, 2)).ToString();
+            wheel4txtbox.Text = (Convert.ToInt64(wheel4bin, 2)).ToString();
         }
 
         private void Sensors(string msg)
@@ -1202,7 +1347,24 @@ namespace MCP2515DM_BM_Controller
 
         private void BrakePressure(string msg)
         {
+            string byte0 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte0.Length);
+            string byte1 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte1.Length);
+            string byte2 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte2.Length);
+            string byte3 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte3.Length);
+            string byte4 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte4.Length);
+            string byte5 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte5.Length);
+            string byte6 = msg.Substring(0, msg.IndexOf(" "));
+            msg = msg.Substring(msg.IndexOf(" ") + 1, msg.Length - byte6.Length);
+            string byte7 = msg.Substring(0, msg.IndexOf(" "));
 
+            //Brake Pressure
+            brakepressuretxtbox.Text = (int.Parse(byte2, System.Globalization.NumberStyles.HexNumber) / 2.54).ToString();
         }
         #endregion
     }

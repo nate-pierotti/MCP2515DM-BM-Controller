@@ -71,7 +71,7 @@
             this.canstatustxtbox = new System.Windows.Forms.TextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statuslbl = new System.Windows.Forms.ToolStripStatusLabel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.clocktxtbox = new System.Windows.Forms.TextBox();
             this.e46speedlbl = new System.Windows.Forms.Label();
             this.e46rpmlbl = new System.Windows.Forms.Label();
             this.e46coolantlbl = new System.Windows.Forms.Label();
@@ -82,15 +82,24 @@
             this.e46oillbl = new System.Windows.Forms.Label();
             this.e46steeringlbl = new System.Windows.Forms.Label();
             this.e46brakelbl = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.mileagetxtbox = new System.Windows.Forms.TextBox();
+            this.rpmtxtbox = new System.Windows.Forms.TextBox();
+            this.speedtxtbox = new System.Windows.Forms.TextBox();
+            this.throttlepostxtbox = new System.Windows.Forms.TextBox();
+            this.watertemptxtbox = new System.Windows.Forms.TextBox();
+            this.oiltemptxtbox = new System.Windows.Forms.TextBox();
+            this.mpgtxtbox = new System.Windows.Forms.TextBox();
+            this.steeringtxtbox = new System.Windows.Forms.TextBox();
+            this.brakepressuretxtbox = new System.Windows.Forms.TextBox();
+            this.wheellbl = new System.Windows.Forms.Label();
+            this.wheel1txtbox = new System.Windows.Forms.TextBox();
+            this.wheel2txtbox = new System.Windows.Forms.TextBox();
+            this.wheel3txtbox = new System.Windows.Forms.TextBox();
+            this.wheel4txtbox = new System.Windows.Forms.TextBox();
+            this.emllbl = new System.Windows.Forms.Label();
+            this.chckenginelbl = new System.Windows.Forms.Label();
+            this.cruiselbl = new System.Windows.Forms.Label();
+            this.overheatlbl = new System.Windows.Forms.Label();
             this.hidconnectiongroupdbox.SuspendLayout();
             this.hiddevicegroupdbox.SuspendLayout();
             this.sendmsggroupbox.SuspendLayout();
@@ -534,17 +543,17 @@
             this.statuslbl.Name = "statuslbl";
             this.statuslbl.Size = new System.Drawing.Size(0, 17);
             // 
-            // textBox1
+            // clocktxtbox
             // 
-            this.textBox1.Location = new System.Drawing.Point(882, 125);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 5;
+            this.clocktxtbox.Location = new System.Drawing.Point(883, 89);
+            this.clocktxtbox.Name = "clocktxtbox";
+            this.clocktxtbox.Size = new System.Drawing.Size(100, 20);
+            this.clocktxtbox.TabIndex = 5;
             // 
             // e46speedlbl
             // 
             this.e46speedlbl.AutoSize = true;
-            this.e46speedlbl.Location = new System.Drawing.Point(838, 206);
+            this.e46speedlbl.Location = new System.Drawing.Point(839, 170);
             this.e46speedlbl.Name = "e46speedlbl";
             this.e46speedlbl.Size = new System.Drawing.Size(38, 13);
             this.e46speedlbl.TabIndex = 6;
@@ -553,7 +562,7 @@
             // e46rpmlbl
             // 
             this.e46rpmlbl.AutoSize = true;
-            this.e46rpmlbl.Location = new System.Drawing.Point(845, 180);
+            this.e46rpmlbl.Location = new System.Drawing.Point(846, 144);
             this.e46rpmlbl.Name = "e46rpmlbl";
             this.e46rpmlbl.Size = new System.Drawing.Size(31, 13);
             this.e46rpmlbl.TabIndex = 7;
@@ -562,7 +571,7 @@
             // e46coolantlbl
             // 
             this.e46coolantlbl.AutoSize = true;
-            this.e46coolantlbl.Location = new System.Drawing.Point(803, 258);
+            this.e46coolantlbl.Location = new System.Drawing.Point(804, 222);
             this.e46coolantlbl.Name = "e46coolantlbl";
             this.e46coolantlbl.Size = new System.Drawing.Size(73, 13);
             this.e46coolantlbl.TabIndex = 8;
@@ -571,7 +580,7 @@
             // e46throttlelbl
             // 
             this.e46throttlelbl.AutoSize = true;
-            this.e46throttlelbl.Location = new System.Drawing.Point(793, 232);
+            this.e46throttlelbl.Location = new System.Drawing.Point(794, 196);
             this.e46throttlelbl.Name = "e46throttlelbl";
             this.e46throttlelbl.Size = new System.Drawing.Size(83, 13);
             this.e46throttlelbl.TabIndex = 9;
@@ -580,7 +589,7 @@
             // e46mileagelbl
             // 
             this.e46mileagelbl.AutoSize = true;
-            this.e46mileagelbl.Location = new System.Drawing.Point(832, 154);
+            this.e46mileagelbl.Location = new System.Drawing.Point(833, 118);
             this.e46mileagelbl.Name = "e46mileagelbl";
             this.e46mileagelbl.Size = new System.Drawing.Size(44, 13);
             this.e46mileagelbl.TabIndex = 10;
@@ -589,7 +598,7 @@
             // e46clocklbl
             // 
             this.e46clocklbl.AutoSize = true;
-            this.e46clocklbl.Location = new System.Drawing.Point(842, 128);
+            this.e46clocklbl.Location = new System.Drawing.Point(843, 92);
             this.e46clocklbl.Name = "e46clocklbl";
             this.e46clocklbl.Size = new System.Drawing.Size(34, 13);
             this.e46clocklbl.TabIndex = 11;
@@ -598,7 +607,7 @@
             // e46mpglbl
             // 
             this.e46mpglbl.AutoSize = true;
-            this.e46mpglbl.Location = new System.Drawing.Point(845, 310);
+            this.e46mpglbl.Location = new System.Drawing.Point(846, 274);
             this.e46mpglbl.Name = "e46mpglbl";
             this.e46mpglbl.Size = new System.Drawing.Size(31, 13);
             this.e46mpglbl.TabIndex = 12;
@@ -607,7 +616,7 @@
             // e46oillbl
             // 
             this.e46oillbl.AutoSize = true;
-            this.e46oillbl.Location = new System.Drawing.Point(827, 284);
+            this.e46oillbl.Location = new System.Drawing.Point(828, 248);
             this.e46oillbl.Name = "e46oillbl";
             this.e46oillbl.Size = new System.Drawing.Size(49, 13);
             this.e46oillbl.TabIndex = 13;
@@ -616,7 +625,7 @@
             // e46steeringlbl
             // 
             this.e46steeringlbl.AutoSize = true;
-            this.e46steeringlbl.Location = new System.Drawing.Point(800, 336);
+            this.e46steeringlbl.Location = new System.Drawing.Point(801, 300);
             this.e46steeringlbl.Name = "e46steeringlbl";
             this.e46steeringlbl.Size = new System.Drawing.Size(76, 13);
             this.e46steeringlbl.TabIndex = 14;
@@ -625,89 +634,183 @@
             // e46brakelbl
             // 
             this.e46brakelbl.AutoSize = true;
-            this.e46brakelbl.Location = new System.Drawing.Point(797, 362);
+            this.e46brakelbl.Location = new System.Drawing.Point(798, 326);
             this.e46brakelbl.Name = "e46brakelbl";
             this.e46brakelbl.Size = new System.Drawing.Size(79, 13);
             this.e46brakelbl.TabIndex = 15;
             this.e46brakelbl.Text = "Brake Pressure";
             // 
-            // textBox2
+            // mileagetxtbox
             // 
-            this.textBox2.Location = new System.Drawing.Point(882, 151);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 16;
+            this.mileagetxtbox.Location = new System.Drawing.Point(883, 115);
+            this.mileagetxtbox.Name = "mileagetxtbox";
+            this.mileagetxtbox.Size = new System.Drawing.Size(100, 20);
+            this.mileagetxtbox.TabIndex = 16;
             // 
-            // textBox3
+            // rpmtxtbox
             // 
-            this.textBox3.Location = new System.Drawing.Point(882, 177);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 17;
+            this.rpmtxtbox.Location = new System.Drawing.Point(883, 141);
+            this.rpmtxtbox.Name = "rpmtxtbox";
+            this.rpmtxtbox.Size = new System.Drawing.Size(100, 20);
+            this.rpmtxtbox.TabIndex = 17;
             // 
-            // textBox4
+            // speedtxtbox
             // 
-            this.textBox4.Location = new System.Drawing.Point(882, 203);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 18;
+            this.speedtxtbox.Location = new System.Drawing.Point(883, 167);
+            this.speedtxtbox.Name = "speedtxtbox";
+            this.speedtxtbox.Size = new System.Drawing.Size(100, 20);
+            this.speedtxtbox.TabIndex = 18;
             // 
-            // textBox5
+            // throttlepostxtbox
             // 
-            this.textBox5.Location = new System.Drawing.Point(882, 229);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 19;
+            this.throttlepostxtbox.Location = new System.Drawing.Point(883, 193);
+            this.throttlepostxtbox.Name = "throttlepostxtbox";
+            this.throttlepostxtbox.Size = new System.Drawing.Size(100, 20);
+            this.throttlepostxtbox.TabIndex = 19;
             // 
-            // textBox6
+            // watertemptxtbox
             // 
-            this.textBox6.Location = new System.Drawing.Point(882, 255);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 20;
+            this.watertemptxtbox.Location = new System.Drawing.Point(883, 219);
+            this.watertemptxtbox.Name = "watertemptxtbox";
+            this.watertemptxtbox.Size = new System.Drawing.Size(100, 20);
+            this.watertemptxtbox.TabIndex = 20;
             // 
-            // textBox7
+            // oiltemptxtbox
             // 
-            this.textBox7.Location = new System.Drawing.Point(882, 281);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 20);
-            this.textBox7.TabIndex = 21;
+            this.oiltemptxtbox.Location = new System.Drawing.Point(883, 245);
+            this.oiltemptxtbox.Name = "oiltemptxtbox";
+            this.oiltemptxtbox.Size = new System.Drawing.Size(100, 20);
+            this.oiltemptxtbox.TabIndex = 21;
             // 
-            // textBox8
+            // mpgtxtbox
             // 
-            this.textBox8.Location = new System.Drawing.Point(882, 307);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 20);
-            this.textBox8.TabIndex = 22;
+            this.mpgtxtbox.Location = new System.Drawing.Point(883, 271);
+            this.mpgtxtbox.Name = "mpgtxtbox";
+            this.mpgtxtbox.Size = new System.Drawing.Size(100, 20);
+            this.mpgtxtbox.TabIndex = 22;
             // 
-            // textBox9
+            // steeringtxtbox
             // 
-            this.textBox9.Location = new System.Drawing.Point(882, 333);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(100, 20);
-            this.textBox9.TabIndex = 23;
+            this.steeringtxtbox.Location = new System.Drawing.Point(883, 297);
+            this.steeringtxtbox.Name = "steeringtxtbox";
+            this.steeringtxtbox.Size = new System.Drawing.Size(100, 20);
+            this.steeringtxtbox.TabIndex = 23;
             // 
-            // textBox10
+            // brakepressuretxtbox
             // 
-            this.textBox10.Location = new System.Drawing.Point(882, 359);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(100, 20);
-            this.textBox10.TabIndex = 24;
+            this.brakepressuretxtbox.Location = new System.Drawing.Point(883, 323);
+            this.brakepressuretxtbox.Name = "brakepressuretxtbox";
+            this.brakepressuretxtbox.Size = new System.Drawing.Size(100, 20);
+            this.brakepressuretxtbox.TabIndex = 24;
+            // 
+            // wheellbl
+            // 
+            this.wheellbl.AutoSize = true;
+            this.wheellbl.Location = new System.Drawing.Point(794, 355);
+            this.wheellbl.Name = "wheellbl";
+            this.wheellbl.Size = new System.Drawing.Size(43, 13);
+            this.wheellbl.TabIndex = 25;
+            this.wheellbl.Text = "Wheels";
+            // 
+            // wheel1txtbox
+            // 
+            this.wheel1txtbox.Location = new System.Drawing.Point(833, 352);
+            this.wheel1txtbox.Name = "wheel1txtbox";
+            this.wheel1txtbox.Size = new System.Drawing.Size(38, 20);
+            this.wheel1txtbox.TabIndex = 26;
+            // 
+            // wheel2txtbox
+            // 
+            this.wheel2txtbox.Location = new System.Drawing.Point(877, 352);
+            this.wheel2txtbox.Name = "wheel2txtbox";
+            this.wheel2txtbox.Size = new System.Drawing.Size(38, 20);
+            this.wheel2txtbox.TabIndex = 27;
+            // 
+            // wheel3txtbox
+            // 
+            this.wheel3txtbox.Location = new System.Drawing.Point(921, 352);
+            this.wheel3txtbox.Name = "wheel3txtbox";
+            this.wheel3txtbox.Size = new System.Drawing.Size(38, 20);
+            this.wheel3txtbox.TabIndex = 28;
+            // 
+            // wheel4txtbox
+            // 
+            this.wheel4txtbox.Location = new System.Drawing.Point(965, 352);
+            this.wheel4txtbox.Name = "wheel4txtbox";
+            this.wheel4txtbox.Size = new System.Drawing.Size(38, 20);
+            this.wheel4txtbox.TabIndex = 29;
+            // 
+            // emllbl
+            // 
+            this.emllbl.AutoSize = true;
+            this.emllbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.emllbl.ForeColor = System.Drawing.Color.Orange;
+            this.emllbl.Location = new System.Drawing.Point(944, 57);
+            this.emllbl.Name = "emllbl";
+            this.emllbl.Size = new System.Drawing.Size(39, 17);
+            this.emllbl.TabIndex = 30;
+            this.emllbl.Text = "EML";
+            this.emllbl.Visible = false;
+            // 
+            // chckenginelbl
+            // 
+            this.chckenginelbl.AutoSize = true;
+            this.chckenginelbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chckenginelbl.ForeColor = System.Drawing.Color.Orange;
+            this.chckenginelbl.Location = new System.Drawing.Point(831, 57);
+            this.chckenginelbl.Name = "chckenginelbl";
+            this.chckenginelbl.Size = new System.Drawing.Size(107, 17);
+            this.chckenginelbl.TabIndex = 31;
+            this.chckenginelbl.Text = "Check Engine";
+            this.chckenginelbl.Visible = false;
+            // 
+            // cruiselbl
+            // 
+            this.cruiselbl.AutoSize = true;
+            this.cruiselbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cruiselbl.ForeColor = System.Drawing.Color.Green;
+            this.cruiselbl.Location = new System.Drawing.Point(944, 34);
+            this.cruiselbl.Name = "cruiselbl";
+            this.cruiselbl.Size = new System.Drawing.Size(54, 17);
+            this.cruiselbl.TabIndex = 32;
+            this.cruiselbl.Text = "Cruise";
+            this.cruiselbl.Visible = false;
+            // 
+            // overheatlbl
+            // 
+            this.overheatlbl.AutoSize = true;
+            this.overheatlbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.overheatlbl.ForeColor = System.Drawing.Color.Red;
+            this.overheatlbl.Location = new System.Drawing.Point(863, 34);
+            this.overheatlbl.Name = "overheatlbl";
+            this.overheatlbl.Size = new System.Drawing.Size(75, 17);
+            this.overheatlbl.TabIndex = 33;
+            this.overheatlbl.Text = "Overheat";
+            this.overheatlbl.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1004, 413);
-            this.Controls.Add(this.textBox10);
-            this.Controls.Add(this.textBox9);
-            this.Controls.Add(this.textBox8);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.overheatlbl);
+            this.Controls.Add(this.cruiselbl);
+            this.Controls.Add(this.chckenginelbl);
+            this.Controls.Add(this.emllbl);
+            this.Controls.Add(this.wheel4txtbox);
+            this.Controls.Add(this.wheel3txtbox);
+            this.Controls.Add(this.wheel2txtbox);
+            this.Controls.Add(this.wheel1txtbox);
+            this.Controls.Add(this.wheellbl);
+            this.Controls.Add(this.brakepressuretxtbox);
+            this.Controls.Add(this.steeringtxtbox);
+            this.Controls.Add(this.mpgtxtbox);
+            this.Controls.Add(this.oiltemptxtbox);
+            this.Controls.Add(this.watertemptxtbox);
+            this.Controls.Add(this.throttlepostxtbox);
+            this.Controls.Add(this.speedtxtbox);
+            this.Controls.Add(this.rpmtxtbox);
+            this.Controls.Add(this.mileagetxtbox);
             this.Controls.Add(this.e46brakelbl);
             this.Controls.Add(this.e46steeringlbl);
             this.Controls.Add(this.e46oillbl);
@@ -718,7 +821,7 @@
             this.Controls.Add(this.e46coolantlbl);
             this.Controls.Add(this.e46rpmlbl);
             this.Controls.Add(this.e46speedlbl);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.clocktxtbox);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.hiddevicegroupdbox);
             this.Controls.Add(this.hiddeviceslistbox);
@@ -784,7 +887,7 @@
         private System.Windows.Forms.Label canidlbl;
         private System.Windows.Forms.Button sendrecordingbtn;
         private System.Windows.Forms.Button e46datadisplaybtn;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox clocktxtbox;
         private System.Windows.Forms.Label e46speedlbl;
         private System.Windows.Forms.Label e46rpmlbl;
         private System.Windows.Forms.Label e46coolantlbl;
@@ -795,15 +898,24 @@
         private System.Windows.Forms.Label e46oillbl;
         private System.Windows.Forms.Label e46steeringlbl;
         private System.Windows.Forms.Label e46brakelbl;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.TextBox mileagetxtbox;
+        private System.Windows.Forms.TextBox rpmtxtbox;
+        private System.Windows.Forms.TextBox speedtxtbox;
+        private System.Windows.Forms.TextBox throttlepostxtbox;
+        private System.Windows.Forms.TextBox watertemptxtbox;
+        private System.Windows.Forms.TextBox oiltemptxtbox;
+        private System.Windows.Forms.TextBox mpgtxtbox;
+        private System.Windows.Forms.TextBox steeringtxtbox;
+        private System.Windows.Forms.TextBox brakepressuretxtbox;
+        private System.Windows.Forms.Label wheellbl;
+        private System.Windows.Forms.TextBox wheel1txtbox;
+        private System.Windows.Forms.TextBox wheel2txtbox;
+        private System.Windows.Forms.TextBox wheel3txtbox;
+        private System.Windows.Forms.TextBox wheel4txtbox;
+        private System.Windows.Forms.Label emllbl;
+        private System.Windows.Forms.Label chckenginelbl;
+        private System.Windows.Forms.Label cruiselbl;
+        private System.Windows.Forms.Label overheatlbl;
     }
 }
 
