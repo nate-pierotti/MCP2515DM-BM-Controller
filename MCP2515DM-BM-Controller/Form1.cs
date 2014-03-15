@@ -164,10 +164,6 @@ namespace MCP2515DM_BM_Controller
                     setupRoutine(inbuffer);
                 }
                 DecodeCan(inbuffer, time, "usbEvent");
-                if (e46)
-                {
-                    //DecodeCan(inbuffer, time, "softwareEvent");
-                }
                 ReadSettings(inbuffer);
             }
             if (_device.IsOpen) _device.Read(OnRead);
@@ -623,6 +619,12 @@ namespace MCP2515DM_BM_Controller
                 if (recording == true)
                 {
                     saveToFile(timeStamp, id, dataLength.ToString(), data, dir);
+                }
+
+                if (e46)
+                {
+                    string CANmessage = id + data;
+                    checkFore46Message(CANmessage);
                 }
             }
             //return Format(timeStamp, ID, dataLength.ToString(), data);
@@ -1162,9 +1164,41 @@ namespace MCP2515DM_BM_Controller
 
         private void checkFore46Message(string canMessage)
         {
-            //canMessage = canMessage.Substring(canMessage.IndexOf(" "),
-        }
+            string ID = canMessage.Substring(0, canMessage.IndexOf(" "));
+            canMessage = canMessage.Substring(canMessage.IndexOf(" ") + 1, (canMessage.Length - ID.Length)-1);
+            string data = canMessage;
 
+            switch (ID)
+            {
+                case "153":
+                    ASC1(data);
+                    break;
+                case "316":
+                    DME1(data);
+                    break;
+                case "329":
+                    DME2(data);
+                    break;
+                case "615":
+                    AC(data);
+                    break;
+                case "613":
+                    Consts(data);
+                    break;
+                case "545":
+                    DME4(data);
+                    break;
+                case "1F0":
+                    ABS(data);
+                    break;
+                case "1F5":
+                    Sensors(data);
+                    break;
+                case "1F8":
+                    BrakePressure(data);
+                    break;
+            }
+        }
         private void ASC1(string msg)
         {
             string byte0 = msg.Substring(0, msg.IndexOf(" "));
