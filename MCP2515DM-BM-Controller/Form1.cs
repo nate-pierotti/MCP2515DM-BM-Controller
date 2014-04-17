@@ -231,7 +231,6 @@ namespace MCP2515DM_BM_Controller
                 }
         }
 
-        
         private void toGUI(string timeStamp, string id, string dataLength, string data, string dir)
         {
             string[] newRow = new string[] { timeStamp, id, dataLength.ToString(), data, dir };
@@ -572,7 +571,7 @@ namespace MCP2515DM_BM_Controller
                 //byte 1 and 2 = standard id
                 string ID1 = items[1].ToString("X");
                 string byte3 = hextobinary(items[2].ToString("X"));
-                byte3 = byte3.Substring(5, byte3.Length - 5);
+                byte3 = byte3.Substring(0, 3);
 
                 string binaryID = Convert.ToString(Convert.ToInt32(ID1, 16), 2);
                 binaryID = "00" + binaryID + byte3;
@@ -1401,5 +1400,10 @@ namespace MCP2515DM_BM_Controller
             brakepressuretxtbox.Text = (int.Parse(byte2, System.Globalization.NumberStyles.HexNumber) / 2.54).ToString();
         }
         #endregion
+
+        private void refreshbtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

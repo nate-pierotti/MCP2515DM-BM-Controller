@@ -159,6 +159,7 @@
             this.refreshbtn.TabIndex = 6;
             this.refreshbtn.Text = "Refresh";
             this.refreshbtn.UseVisualStyleBackColor = true;
+            this.refreshbtn.Click += new System.EventHandler(this.refreshbtn_Click);
             // 
             // pidlbl
             // 
