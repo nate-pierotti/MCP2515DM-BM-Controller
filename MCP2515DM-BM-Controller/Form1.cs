@@ -855,8 +855,8 @@ namespace MCP2515DM_BM_Controller
             if (byte2 != null) buffer[7] = Convert.ToByte(hexToInt(byte2));
             if (byte3 != null) buffer[8] = Convert.ToByte(hexToInt(byte3));
             if (byte4 != null) buffer[9] = Convert.ToByte(hexToInt(byte4));
-            if (byte5 != null) buffer[10] = Convert.ToByte(hexToInt(byte6));
-            if (byte6 != null) buffer[11] = Convert.ToByte(hexToInt(byte5));
+            if (byte5 != null) buffer[10] = Convert.ToByte(hexToInt(byte5));
+            if (byte6 != null) buffer[11] = Convert.ToByte(hexToInt(byte6));
             if (byte7 != null) buffer[12] = Convert.ToByte(hexToInt(byte7));
             if (byte8 != null) buffer[13] = Convert.ToByte(hexToInt(byte8));
 
